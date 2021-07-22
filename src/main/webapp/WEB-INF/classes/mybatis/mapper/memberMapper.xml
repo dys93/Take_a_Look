@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="member">
+	<select id="loginMember" parameterType="String" resultType="com.fin.app.member.Member">
+		SELECT mNum, mId, mPwd, mNick, mRole, lastLogin
+		FROM member
+		WHERE mId = #{mId} 
+	</select>
+	
+    <select id="clientSeq" resultType="Long">
+       SELECT client_seq.NEXTVAL FROM dual 
+    </select>
+
+    <insert id="client" parameterType="com.fin.app.member.Member">
+		INSERT INTO client(mNum, mType) VALUES (#{mNum}, 1) 
+    </insert>
+    
+    <insert id="insertMember" parameterType="com.fin.app.member.Member">
+		INSERT INTO member(mNum, mId, mPwd, mNick, mRole, createdDate)
+		VALUES (#{mNum}, #{mId}, #{mPwd}, #{mNick}, 1, SYSDATE) 
+    </insert>
+    
+     <insert id="insertMemberDetail" parameterType="com.fin.app.member.Member">
+		INSERT INTO memberDetail(mId, mName, mTel, mZip, mAddr1, mAddr2, mEmail, mBirth)
+		VALUES ( #{mId}, #{mName}, #{mTel}, #{mZip}, #{mAddr1}, #{mAddr2}, #{mEmail}, #{mBirth}) 		
+    </insert>
+
+    <update id="insertMemberAndDetail" parameterType="com.fin.app.member.Member">
+		INSERT ALL
+		INTO member(mNum, mId, mPwd, mNick)
+		VALUES (#{mNum}, #{mId}, #{mPwd}, #{mNick}) 
+		INTO memberDetail(mId, mBirth, mEmail, mtel, mzip, mAddr1, mAddr2)
+		VALUES (#{mId}, #{mBirth}, #{mEmail}, #{mtel}, 
+				#{mzip, jdbcType=VARCHAR}, #{mAddr1, jdbcType=VARCHAR}, 
+				#{mAddr2, jdbcType=VARCHAR})
+		SELECT * FROM dual		
+    </update>
+    
+    <select id="readMember" parameterType="String" resultType="com.fin.app.member.Member">
+    	SELECT m.mId, mPwd, mNick, mRole, mNum, mName, mTel, mZip,
+    			mAddr1, mAddr2, mEmail, TO_CHAR(mBirth, 'YYYY-MM-DD') mBirth
+    	FROM member m 
+    	LEFT OUTER JOIN memberDetail m2 ON m.mId = m2.mId
+    	WHERE m.mId=#{mId}
+    </select>
+    
+    <select id="readMember2" parameterType="String" resultType="com.fin.app.member.Member">
+    	SELECT mId, mEmail FROM memberDetail WHERE mEmail=#{mEmail}
+    </select>
+
+    <update id="updateMember1" parameterType="com.fin.app.member.Member">
+		UPDATE member SET mPwd=#{mPwd}
+		WHERE mId=#{mId}
+    </update>
+	
+    <update id="updateMember2" parameterType="com.fin.app.member.Member">
+		UPDATE memberDetail SET mEmail=#{mEmail, jdbcType=VARCHAR}, 
+			mTel=#{mTel, jdbcType=VARCHAR}, mBirth=#{mBirth, jdbcType=VARCHAR},
+			mZip=#{mZip, jdbcType=VARCHAR},
+			mAddr1=#{mAddr1, jdbcType=VARCHAR}, mAddr2=#{mAddr2, jdbcType=VARCHAR}
+		WHERE mId=#{mId}
+    </update>
+    
+    <update id="lastlogin" parameterType="com.fin.app.member.Member">
+    	UPDATE member SET lastLogin=(SYSDATE)
+    	WHERE mId=#{mId}
+    </update>
+</mapper>

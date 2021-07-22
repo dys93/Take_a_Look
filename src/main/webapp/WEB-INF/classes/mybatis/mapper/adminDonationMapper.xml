@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="adminDonation">
+	<select id="listDonation" resultType="com.fin.app.admin.donationManagement.DonationManagement">
+		SELECT s.orderNum, m.mId, d.mName, s.finalPrice, TO_CHAR(s.sDate, 'YYYY-MM-DD') sDate
+		FROM store s
+		JOIN orderProduct p ON s.orderNum = p.orderNum
+		JOIN member m ON p.mNum = m.mNum
+		JOIN memberDetail d ON m.mId = d.mId
+	</select>
+	
+	<select id="totalDonation" resultType="Integer">
+		SELECT SUM(finalPrice) FROM store
+	</select>
+
+</mapper>

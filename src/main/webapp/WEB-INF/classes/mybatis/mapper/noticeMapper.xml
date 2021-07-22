@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="notice">
+	<select id="seq" resultType="Integer">
+		SELECT notice_seq.NEXTVAL FROM dual
+	</select>
+	
+	<select id="listCategory" resultType="com.fin.app.notice.Notice">
+		SELECT nCateNum, nCateName
+		FROM noticeCategory
+	</select>
+	
+	<insert id="insertNotice" parameterType="com.fin.app.notice.Notice">
+		INSERT INTO notice(nNum, mId, nTitle, nContent, nImg, nHit, nCreated, nCateNum)
+				VALUES(#{nNum}, #{mId}, #{nTitle},
+					#{nContent}, #{nImg, jdbcType=VARCHAR}, 0, SYSDATE, #{nCateNum})
+	</insert>
+
+	<sql id="where-list">
+		<if test="condition=='all' ">
+			( INSTR(nTitle, #{keyword}) &gt; 0
+				OR DBMS_LOB.INSTR(nContent, #{keyword}) &gt; 0 )
+		</if>
+		<if test="condition=='nTitle' ">
+			INSTR(nTitle, #{keyword}) &gt; 0
+		</if>
+		<if test="condition=='nContent' ">
+			DBMS_LOB.INSTR( nContent, #{keyword}) &gt; 0 
+		</if>
+		<if test="condition=='nCreated' ">
+			( TO_CHAR(nCreated, 'YYYY-MM-DD') = #{keyword}
+				OR TO_CHAR(nCreated, 'YYYYMMDD') = #{keyword} )
+		</if>
+	</sql>
+	
+	<!-- 공지 글  리스트 -->
+	<select id="listNoticeTop" resultType="com.fin.app.notice.Notice">
+		SELECT n.nNum, n.mId, nTitle, nHit, n.nCateNum, nCateName, 
+				TO_CHAR(nCreated, 'YYYY-MM-DD') nCreated,
+				NVL(fileCount, 0) fileCount
+		FROM notice n
+		JOIN member m ON n.mId=m.mId
+		JOIN noticeCategory nc ON n.nCateNum = nc.nCateNum
+		LEFT OUTER JOIN (
+			SELECT nNum, COUNT(*) fileCount FROM noticeFile
+			GROUP BY nNum
+		) f ON n.nNum=f.nNum
+		ORDER BY nNum DESC
+	</select>
+	
+	<!-- 데이터개수  -->
+	<select id="dataCount" parameterType="map" resultType="Integer">
+		SELECT NVL(COUNT(*), 0)
+		FROM notice n
+		JOIN member m ON n.mId=m.mId
+		<where>
+			<if test="keyword != null and keyword!=''  ">
+				<include refid="where-list"/>
+			</if>
+		</where>
+	</select>
+	
+	<!-- 리스트 -->
+	<select id="listNotice" parameterType="map" resultType="com.fin.app.notice.Notice">
+		SELECT n.nNum, n.mId, nTitle, nHit, nImg, n.nCateNum, nCateName, 
+		       nCreated, NVL(fileCount, 0) fileCount
+		FROM notice n
+		JOIN member m ON n.mId=m.mId
+		JOIN noticeCategory nc ON n.nCateNum = nc.nCateNum
+		LEFT OUTER JOIN (
+			SELECT nNum, COUNT(*) fileCount FROM noticeFile
+			GROUP BY nNum
+		) f ON n.nNum=f.nNum
+		<where>
+			<if test="keyword != null and keyword != ''">
+				<include refid="where-list"/>
+			</if>
+		</where>
+		ORDER BY nNum DESC
+		OFFSET #{offset} ROWS FETCH FIRST #{rows} ROWS ONLY
+	 </select>
+
+    <!-- 글보기 -->
+    <select id="readNotice" parameterType="Integer" resultType="com.fin.app.notice.Notice">
+		SELECT nNum, n.mId, nTitle, nContent, nCreated, nHit, nImg, n.nCateNum, nCateName
+		FROM notice n
+		JOIN noticeCategory nc ON n.nCateNum = nc.nCateNum
+		JOIN member m ON n.mId=m.mId 
+		WHERE nNum = #{nNum}
+	</select>
+
+	<!-- 조회수 증가 -->
+	<update id="updateHitCount" parameterType="Integer">
+		UPDATE notice SET nHit=nHit+1 WHERE nNum = #{nNum}
+	</update>
+
+	<!-- 이전글 -->
+	<select id="preReadNotice" parameterType="map" resultType="com.fin.app.notice.Notice">
+		SELECT nNum, nTitle
+		FROM notice n
+		JOIN member m ON n.mId=m.mId
+		<where>
+			<if test="keyword != null and keyword != '' ">
+				<include refid="where-list"/>
+			</if>
+			AND (nNum &gt; #{nNum})
+		</where>
+		ORDER BY nNum ASC
+		FETCH FIRST 1 ROWS ONLY
+    </select>
+
+    <!-- 다음글 -->
+    <select id="nextReadNotice" parameterType="map" resultType="com.fin.app.notice.Notice">
+		SELECT nNum, nTitle
+		FROM notice n
+		JOIN member m ON n.mId=m.mId
+		<where>
+			<if test="keyword != null and keyword != '' ">
+				<include refid="where-list"/>
+			</if>
+			AND (nNum &lt; #{nNum})
+		</where>
+		ORDER BY nNum DESC
+		FETCH FIRST 1 ROWS ONLY
+    </select>
+    
+	<!-- 수정 -->
+	<update id="updateNotice" parameterType="com.fin.app.notice.Notice">
+		UPDATE notice SET nTitle=#{nTitle},nCateNum=#{nCateNum},
+				nContent=#{nContent}
+		WHERE nNum=#{nNum}
+	</update>
+    
+	<!-- 삭제 -->
+	<delete id="deleteNotice" parameterType="Integer">
+		DELETE FROM notice WHERE nNum=#{nNum}
+	</delete>
+	
+	<!-- 파일 -->
+	<insert id="insertFile" parameterType="com.fin.app.notice.Notice">
+		INSERT INTO noticeFile(nFileNum, nNum, nSaveFile, 
+					nOriginalFile, nFileSize) VALUES
+				(noticeFile_seq.NEXTVAL, #{nNum}, #{nSaveFile},
+					#{nOriginalFile}, #{nFileSize})
+	</insert>
+	
+	<select id="listFile" parameterType="Integer" resultType="com.fin.app.notice.Notice">
+		SELECT nFileNum, nNum, nSaveFile, nOriginalFile, nFileSize
+		FROM noticeFile
+		WHERE nNum=#{nNum}    
+	</select>
+	
+	<select id="readFile" parameterType="Integer" resultType="com.fin.app.notice.Notice">
+		SELECT nFileNum, nNum, nSaveFile, nOriginalFile, nFileSize
+		FROM noticeFile
+	    WHERE nFileNum=#{nFileNum}      
+	</select>
+	
+	<delete id="deleteFile" parameterType="map">
+		DELETE FROM noticeFile WHERE ${field} = #{nNum}
+	</delete>
+</mapper>

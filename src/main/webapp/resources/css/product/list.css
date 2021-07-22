@@ -1,0 +1,100 @@
+@charset "UTF-8";
+
+@font-face {
+    font-family: 'Cafe24Ssurround';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2105_2@1.0/Cafe24Ssurround.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {/*본문 내용*/
+    font-family: 'Cafe24SsurroundAir';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2105_2@1.0/Cafe24SsurroundAir.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {/*강조하는 곳*/
+    font-family: 'GmarketSansMedium';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.productListBody{
+	font-family: Cafe24SsurroundAir
+}
+
+.productListBody ul{
+	list-style: none;
+}
+
+.productListBody .productListForm{
+	padding: 0;
+	width: 1300px;
+	margin: auto;
+	margin-top: 30px;
+
+}
+
+.productListBody .prodcutListTop{
+	font-family: GmarketSansMedium;
+}
+
+.productListBody .prooductSearchBar{
+	float: right;
+}
+
+.productListForm .pageCount{
+	float: right;
+	clear: both;
+	font-size: 20px;
+}
+
+.productListBody .imgLayout {
+	width: 400px;
+	height: 500px;
+	padding: 10px 5px 10px;
+	margin: 5px;
+	cursor: pointer;
+}
+
+.productListBody .product {
+     width:180px;
+     height:25px;
+     line-height:25px;
+     margin:5px auto;
+     display: inline-block;
+     white-space:nowrap;
+     overflow:hidden;
+     text-overflow:ellipsis;
+     cursor: pointer;
+}
+.productListBody .productName{
+    font-size: 20px;
+    margin-top: 5px;
+    float: right;
+    width: auto;
+    clear: both;
+    font-family: GmarketSansMedium;
+}
+.productListBody .productPrice{
+    float: right;
+    width: auto;
+    font-size: 18px;
+    height: 30px;
+    line-height: 30px;
+    clear: both;
+}
+.productListBody .tables {
+	width: 100%; border-spacing: 0; border-collapse: collapse;
+}
+.productListBody .tables tr th, .productListBody .tables tr td {
+	padding: 50px 0;
+}
+
+.productListBody .productBtn{
+	 float: right;
+}
+.productListBody .pageCountRight{
+	height: 20px;
+}

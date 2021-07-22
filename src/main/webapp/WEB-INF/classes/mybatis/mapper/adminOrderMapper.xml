@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="adminOrder">
+	<select id="listOrder" resultType="com.fin.app.admin.orderManagement.OrderManagement">
+        SELECT p.orderNum, p.mNum, c.mType, p.orderState, s.finalPrice, p.orderName, d.deliverystate
+		FROM orderProduct p
+		JOIN store s ON p.orderNum = s.orderNum
+		JOIN client c ON p.mNum = c.mNum
+        LEFT OUTER JOIN delivery d ON s.orderNum = d.orderNum
+	</select>
+	
+    <select id="readOrder" parameterType="Integer" resultType="com.fin.app.admin.orderManagement.OrderManagement">
+		SELECT p.orderNum, p.mNum, p.orderState, p.orderName, p.orderTel, p.orderEmail,
+			TO_CHAR(s.sDate, 'YYYY-MM-DD') sDate, s.sDelivCharge, s.sZip, s.sAddr1, s.sAddr2, aMilePrice, s.finalPrice, d.deliveryState 
+		FROM orderProduct p
+		JOIN store s ON p.orderNum = s.orderNum
+		JOIN delivery d ON s.orderNum = d.orderNum
+		JOIN addedMileage m ON s.aMileNum = m.aMileNum
+		WHERE p.orderNum = #{orderNum}
+	</select>
+	
+	<select id="updateOrderStateIng" parameterType="Integer">
+		UPDATE delivery SET deliveryState = 1 WHERE orderNum=#{orderNum}
+	</select>
+	
+	<select id="updateOrderStateOk" parameterType="Integer">
+		UPDATE delivery SET deliveryState = 2 WHERE orderNum=#{orderNum}
+	</select>
+</mapper>

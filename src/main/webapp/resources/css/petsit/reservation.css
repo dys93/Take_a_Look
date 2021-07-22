@@ -1,0 +1,816 @@
+@charset "UTF-8";
+
+.petsitReserve {
+	font-size: 15px;
+	font-family: "Spoqa Han Sans", "Noto Sans KR", sans-serif !important;
+	color: rgb(57, 60, 71);
+}
+
+.petsitReserve .slide-body{
+	width: 1200px;
+	height: 600px;
+	margin: 0 auto;
+	text-align: center;
+}
+
+.petsitReserve .slide-body img{
+	width: 1200px;
+	height: 600px;
+	margin: 0 auto;
+	text-align: center;
+}
+
+.petsitReserve .body-main {
+	margin-top: 73px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 1300px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;	
+}
+
+.petsitReserve .body-left {
+	float: left;
+	width: 580px;
+	background-color: white;
+}
+
+.petsitReserve .body-right {
+	float: right;
+	width: 450px;
+	height: 1200px;
+}
+
+.petsitReserve .profile {
+	display: flex;
+    flex-direction: row;
+}
+
+.petsitReserve .profile-p img{
+	overflow: hidden;
+    width: 100px;
+    height: 100px;
+    border: none;
+    border-radius: 12px;
+    margin-top: 5px;
+    background-color: #ccc;
+}
+
+.petsitReserve .frofile-t {
+	margin-left: 20px;
+}
+
+.petsitReserve .fofile-c{
+	display: flex;
+    flex-flow: row wrap;
+    margin-top: 12px;
+    width: 458px;
+}
+
+.petsitReserve .fofile-c p{
+	font-size: 14px;
+    line-height: 21px;
+    letter-spacing: -0.2px;
+    color: rgb(94, 99, 109);
+    margin: 0 3px 0 0;
+}
+
+
+.petsitReserve .best {
+	margin-top: 60px;
+	height: 100px;
+	text-align: center;
+	background-color: #EAEAEA;
+	display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+    position: relative;
+}
+
+.petsitReserve .intro {
+	margin-top: 60px;
+}
+
+.petsitReserve .intro-d {
+	margin-top: 20px;
+}
+
+.petsitReserve .certif {
+	margin-top: 60px;
+	height: 200px;
+}
+
+.petsitReserve .certif-d {
+	margin: 32px 0px;	
+}
+
+.petsitReserve .certf-dp {
+	background-color: gray;
+	border-radius: 5px;
+	width: 210px;
+	height: 140px;
+	float: left;
+	clear: both;
+	margin-left: 60px
+}
+
+.petsitReserve .certf-dp img {
+	border-radius: 5px;
+	width: 210px;
+	height: 140px;
+}
+
+
+.petsitReserve .certf-de{
+	width: 190px;
+	height: 160px;
+	margin-right: 100px;
+	float:right;
+}
+
+.petsitReserve .certif-title {
+	margin-top: 20px;
+}
+
+.petsitReserve .certif-date {
+	margin-top: 30px;
+	font-size: x-small;
+}
+
+.petsitReserve .reverve-detail {
+	height: 810px;
+	margin-top: 38px;
+	
+	width: 375px;
+    border-radius: 8px;
+    border: 1px solid rgb(223, 227, 234);
+    box-shadow: rgb(0 0 0 / 7%) 1px 3px 7px;
+    padding-left: 32px;
+    padding-right: 32px;
+    padding-bottom: 32px;
+}
+
+.petsitReserve .dateBar {
+	width: 300px;
+    height: 65px;
+	display: flex;
+	border: 1px solid rgb(223, 227, 234);
+	border-radius: 4px;
+	box-shadow: rgb(0 0 0 / 3%) 0px 2px 3px 0px;
+}
+
+.petsitReserve .dateBar:focus {
+	outline: none;
+	border: 1px solid rgb(113, 162, 255);	
+}
+
+.petsitReserve .checkDate {
+	border: none;
+	text-align: center;
+	height: 60px;
+	width:110px;
+}
+
+.petsitReserve .checkDate:focus {
+	outline:none;
+	border-bottom: 1px solid rgb(113, 162, 255);
+}
+ 
+.petsitReserve .fas fa-arrow-right {
+     margin-top: 10px;
+}
+
+.petsitReserve .dateButton {
+	width: 23px;
+	height: 27px;
+	background-color: white;
+	border: none;
+	margin-top: 13px;
+	margin-left: 15px;
+}
+
+.petsitReserve .checkinCal {
+	height: 56px;
+	margine: none;
+	padding: none;
+}
+
+.petsitReserve .pointR {
+	padding: 17px 0px 0px
+}
+
+
+
+.petsitReserve .reviewT{
+   display: flex;
+   flex-direction: row;
+   align-items: center;
+   margin-bottom: 38px
+}
+
+.petsitReserve .reviewT h3{
+   width: 30%;
+   margin: 5px 0;
+}
+
+.petsitReserve .star {
+   width: 150px;
+   margin: 0px 0px 5px 0px;
+
+}
+
+.petsitReserve .reverve-detail p {
+	font-family: "Noto Sans KR";
+    font-size: 14px;
+    letter-spacing: -0.2px;
+    line-height: 20px;
+    color: rgb(57, 60, 71);
+    margin-top: 28px;
+    text-align: left;
+}
+
+.petsitReserve .reserve-time {
+    margin-top: 28px;	
+    padding-left: 10px;
+}
+
+.petsitReserve .reserve-time p {
+    margin: 3px; 0;
+    color: 	rgb(153, 153, 153);
+}
+
+.petsitReserve .time-checkin p:first-child {
+	font-family: "Noto Sans KR";
+    font-size: 14px;
+    letter-spacing: -0.2px;
+    line-height: 20px;
+    color: rgb(57, 60, 71);
+    margin: 0 0 18px 0;
+}
+
+.petsitReserve .time-checkin button {
+	display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    width: 149px;
+    height: 50px;
+    border: 1px solid rgb(223, 227, 234);
+    border-radius: 4px;
+    box-shadow: rgb(0 0 0 / 3%) 0px 2px 3px 0px;
+    background-color: white;
+}
+
+.petsitReserve .time-checkin p:last-child {
+  	 font-size: 15px;
+    line-height: 22px;
+    color: rgb(153, 153, 153);
+    margin: 10px 0 0 0;
+
+}
+
+.petsitReserve .time-checkout button {
+	display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    width: 149px;
+    height: 50px;
+    border: 1px solid rgb(223, 227, 234);
+    border-radius: 4px;
+    box-shadow: rgb(0 0 0 / 3%) 0px 2px 3px 0px;
+    background-color: white;
+}
+
+.petsitReserve .time-checkout p:first-child {
+	font-family: "Noto Sans KR";
+    font-size: 14px;
+    letter-spacing: -0.2px;
+    line-height: 20px;
+    color: rgb(57, 60, 71);
+    margin: 0 0 18px 0;
+}
+
+.petsitReserve .time-checkout p:last-child {
+  	 font-size: 15px;
+    line-height: 22px;
+    color: rgb(153, 153, 153);
+    margin: 10px 0 0 0;
+
+}
+
+.petsitReserve .pet-p {
+	font-family: "Noto Sans KR";
+    font-size: 14px;
+    letter-spacing: -0.2px;
+    line-height: 20px;
+    color: rgb(57, 60, 71);
+    margin-top: 38px;
+    margin-bottom: 18px;	
+}
+
+.petsitReserve .pet-button {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 311px;
+    height: 50px;
+    border: 1px solid rgb(223, 227, 234);
+    border-radius: 4px;
+    box-shadow: rgb(0 0 0 / 3%) 0px 2px 3px 0px;
+    background-color: white;
+    padding: 15px
+}
+
+.petsitReserve .pet-button p {
+    font-size: 15px;
+    letter-spacing: -0.2px;
+    line-height: 22px;
+    color: rgb(153, 153, 153);
+	margin: 0 30px 0 0;
+}
+   
+.petsitReserve .reserve-send {
+	display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 311px;
+    height: 59px;
+    border-radius: 3px;
+    background-color: rgb(113, 162, 255);
+    margin-top: 50px;
+    user-select: none;
+    cursor: pointer;
+}
+
+.petsitReserve .rvBtn{
+	width: 311px;
+    height: 59px;
+    border-radius: 3px;
+    background-color: #023047;
+    margin-top: 50px;	
+    margin: 0 0px;
+    font-family: GmarketSansMedium;
+}
+
+.petsitReserve .rvBtn:hover{
+	color: whitesmoke;
+	background: #073f5a;
+	box-shadow: inset -5px -3px 7px 1px rgb(0 0 0 / 10%),4px 3px 7px 1px rgb(0 0 0 / 10%);	
+	font-family: GmarketSansMedium;
+}
+
+.petsitReserve .rvBtn p{
+	font-family: "Noto Sans KR";
+    font-weight: 600;
+    font-size: 15px;
+    letter-spacing: 0.2px;
+    line-height: 22px;
+    color: white;
+    margin:0 0;
+    text-align: center;
+}
+
+.petsitReserve .price {
+	height: 200px;
+	
+	width: 375px;
+    border-radius: 8px;
+    border: 1px solid rgb(223, 227, 234);
+    box-shadow: rgb(0 0 0 / 7%) 1px 3px 7px;
+    padding: 38px 32px;
+    margin-top: 38px;
+    margin-bottom: 8px;
+}
+
+.petsitReserve .price-title {
+	display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    height: 25px;
+    margin-bottom: 10px;
+}
+
+.petsitReserve .price-title p:first-child {
+    font-weight: 600;
+    font-size: 19px;
+	margin-right: 80px;
+}
+
+.petsitReserve .price-title p:nth-child(2) {
+ 	 font-size: 13px;
+}
+
+.petsitReserve .price-title p:nth-child(3) {
+ 	 font-size: 13px;
+}
+
+.petsitReserve .pet-type {
+	display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 10px;
+    height: 22px;
+}
+
+.petsitReserve .pet-type p {
+	margin: 0 0;
+}
+
+.petsitReserve .selectB {
+	padding: 32px 32px 24px;
+	width: 310.99px;
+	height: 272.46px;
+	background-color: white;
+	z-index: 999;
+	box-shadow: 0 2px 8px rgb(0 0 0 / 15%);
+}
+
+.petsitReserve .boxLine {
+	display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+	height: 40px;
+}
+
+
+.petsitReserve .lineL p:first-child{
+	font-family: "Noto Sans KR";
+    font-size: 14px;
+    letter-spacing: -0.2px;
+    line-height: 20px;
+    color: rgb(56, 60, 72);
+    margin: 0 0px;
+}
+
+.petsitReserve .lineL p:last-child{
+	font-size: 12px;
+    letter-spacing: -0.2px;
+    line-height: 17px;
+    color: rgb(94, 99, 109);
+    margin: 3px 0 0 0;
+}
+
+
+.petsitReserve .pmBtn{
+	display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 1px solid #8ecae6;
+    cursor: pointer;
+    user-select: none;
+    background-color: white;
+}
+
+.petsitReserve .lineR{
+	display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 108px;
+    height: 40px;
+}
+
+.petsitReserve .lineR p{
+	font-size: 13px;
+    font-weight: 600;
+    letter-spacing: -0.2px;
+    line-height: 19px;
+    color: rgb(94, 99, 109);
+    margin: 0 20px;
+}
+
+.petsitReserve .sth{
+	margin-top: 24px;
+}
+
+.petsitReserve .bFooter{
+	display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 32px;
+}
+
+.petsitReserve .bFooter p:first-child{
+	font-size: 12px;
+    line-height: 18px;
+    color: #219ebc;
+    margin: 0 0px;
+}
+
+.petsitReserve .bFooter p:last-child{
+	font-family: "Noto Sans KR";
+    font-size: 12px;
+    line-height: 18px;
+    color: #219ebc;
+    cursor: pointer;
+    margin: 0 0px;
+}
+
+.petsitReserve .bFooter button{
+	border:none;
+	background-color: white;
+}
+
+
+
+.petsitReserve .{
+	
+}
+
+.petsitReserve .{
+	
+}
+
+.petsitReserve .{
+	
+}
+
+
+
+
+
+
+
+
+
+
+.petsitReserve .type-L {
+	display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 24px;
+}
+
+.petsitReserve .type-L p:first-child {
+	font-size: 14px;
+    line-height: 19px;
+    color: rgb(56, 60, 72);
+    margin-left: 10px;
+}
+
+.petsitReserve .type-L p:last-child {
+	font-size: 12px;
+    line-height: 17px;
+    color: rgb(153, 153, 153);
+    margin-left: 12px;
+}
+
+.petsitReserve .type-R {
+	display: flex;
+    flex-direction: row;
+}
+
+.petsitReserve .type-R p:first-child {
+	font-size: 14px;
+    letter-spacing: 0.5px;
+    line-height: 20px;
+    color: rgb(78, 82, 91);
+    margin-right: 12px;
+}
+
+.petsitReserve .type-R p:last-child {
+	font-size: 14px;
+    letter-spacing: 0.5px;
+    line-height: 20px;
+    color: rgb(78, 82, 91);
+}    
+
+
+.petsitReserve .schedule {
+	height: 420px;
+
+	width: 375px;
+    border-radius: 8px;
+    border: 1px solid rgb(223, 227, 234);
+    box-shadow: rgb(0 0 0 / 7%) 1px 3px 7px;
+    padding-left: 32px;
+    padding-right: 32px;
+    padding-bottom: 32px;
+}
+
+.petsitReserve .schedule h6 {
+	margin-top: 27px;
+	margin-bottom: 27px;
+	text-align: left;
+	
+}
+
+.petsitReserve .btnDate {
+	display: inline-block;
+	font-size: 15px;
+	font-family: 나눔고딕, "맑은 고딕", 돋움, sans-serif;
+	color:#333333;
+	border:1px solid #ccc;
+	width: 30px;
+	height: 30px;
+	line-height: 30px;
+	border-radius: 25px;
+    background-color:#fff;
+    text-align:center;
+    cursor: pointer;
+}
+
+
+.petsitReserve .titleDate {
+	display: inline-block;
+	font-weight: 400; 
+	font-size: 15px;
+	font-family: 나눔고딕, "맑은 고딕", 돋움, sans-serif;
+	padding:2px 4px 4px;
+	text-align:center;
+	position: relative;
+	top: 4px;
+	margin: 0 45px;
+}
+
+.petsitReserve .scheduleBottom {
+	display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 24px;
+    margin-left: 36px;
+    margin-right: 36px;
+}
+
+
+.petsitReserve .bottom {
+	display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.petsitReserve .bottom p{
+	font-size: 13px;
+    letter-spacing: -0.2px;
+    line-height: 19px;
+    color: rgb(78, 82, 90);
+    margin: 0 0px;
+}
+
+.petsitReserve .boxL {
+	background-color: #8ecae6;
+    width: 15px;
+    height: 15px;
+    margin-right: 8px;
+}
+    
+.petsitReserve .boxR {
+	background-color: rgb(242, 243, 247);
+    width: 15px;
+    height: 15px;
+    margin-right: 8px;
+}
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.petsitReserve .location {
+	height: 420px;
+	
+	display: flex;
+    flex-direction: column;
+    width: 375px;
+    border-radius: 8px;
+    border: 1px solid rgb(223, 227, 234);
+    box-shadow: rgb(0 0 0 / 7%) 1px 3px 7px;
+    margin-top: 38px;
+    overflow: hidden;
+  
+}
+
+.petsitReserve .bar{
+	width: 310px;
+    height: 3px;
+    background-color: rgb(235, 235, 235);
+    margin: 12px 0px;
+}
+
+.petsitReserve .extra {
+	display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+	height:20px;
+	margin-top: 12px;
+}
+
+.petsitReserve .extra p {
+	font-family: "Noto Sans KR", sans-serif;
+    font-size: 14px;
+    color: rgb(78, 82, 91);
+}
+
+.petsitReserve .extra span{
+	text-decoration: underline;
+}
+
+
+.petsitReserve .secondline {
+	display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.petsitReserve .secondline p {
+	margin-top: 0;
+    margin-bottom: 0;
+    font-size: 13px;
+    color: rgb(126, 126, 126);
+}
+
+.petsitReserve .lTop {
+	display: flex;
+    flex-grow: 1;
+    flex-direction: column;
+    justify-content: center;
+    margin: 0 38px;
+    
+    width: 297px;
+    height: 120px;
+    
+}  
+
+.petsitReserve .topContent {
+	display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 38px;
+    margin-bottom: 34px;
+    
+    width: 297px;
+    height: 140x;
+}
+
+.petsitReserve .topContent p{
+	font-weight: 600;
+    font-size: 17px;
+    letter-spacing: -0.2px;
+    line-height: 25px;
+    color: rgb(57, 60, 71);
+    
+    width: 99px;
+    height: 80px;
+}
+
+.petsitReserve .ContentR {
+	box-sizing: border-box;
+}
+
+.petsitReserve .ContentR p:first-child {    
+    font-size: 14px;
+    letter-spacing: -0.2px;
+    line-height: 20px;
+    color: rgb(57 60 71); 
+    width: 160px;
+    font-family: "Noto Sans KR", sans-serif;
+    margin: 3px 0 0;
+    
+    height: 20px;
+}
+
+.petsitReserve .ContentR p:last-child {
+	font-size: 14px;
+    letter-spacing: -0.2px;
+    line-height: 20px;
+    color: rgb(57 60 71);
+    width: 160px;
+    margin: 5px 0 0;
+    
+    height: 40px;
+}
+
+.petsitReserve . {
+	
+}
+
+.petsitReserve .sitBottom {
+	margin-right: 15px;
+}
+
+.petsitReserve .lBottom {
+	width: 373px;
+	height: 270px;
+}
+
+

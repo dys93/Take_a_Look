@@ -1,0 +1,382 @@
+@charset "UTF-8";
+
+.petsitList {
+	font-size: 15px;
+	color: rgb(57, 60, 71);
+	font-family: 'Cafe24SsurroundAir';
+}
+
+.searchCondition ul li {
+	cursor: pointer;
+}
+
+.listInfo-title p{
+	font-family: 'GmarketSansMedium';
+}
+
+.petsitList .searchAddr b {
+	font-family: 'GmarketSansMedium';
+}
+
+.petsitList .searchCondition b {
+	font-family: 'GmarketSansMedium';
+}
+
+.petsitList .searchDong {
+   width: 400px;
+   height: 59px;
+   display: flex;
+   border: 1.5px solid rgb(223, 227, 234);
+   border-radius: 4px;
+   box-shadow: rgb(0 0 0 / 3%) 0px 2px 3px 0px;
+   margin: 5 5px;
+}
+.petsitList .searchDong:focus {
+   outline: none;
+   border: 1.5px solid rgb(113, 162, 255);
+}
+
+.petsitList .inputbtn {
+	display: flex;
+}
+
+
+.petsitList .serchbtn {
+	width: 95px;
+   height: 59px;
+   border: 1.5px solid #023047;
+   border-radius: 28px;
+   box-shadow: rgb(0 0 0 / 3%) 0px 2px 3px 0px;
+   background-color: #023047;
+   margin: 0 auto; 
+   float: left;
+   color: white;
+   
+}
+
+
+.petsitList .reserve-detail {
+	float: right;
+    width: 50%;
+    padding: 25px;
+    text-align: left;
+}
+
+
+.petsitList .dateBar {
+	width: 475px;
+    height: 59px;
+	display: flex;
+	border: 1.5px solid rgb(223, 227, 234);
+	border-radius: 4px;
+	box-shadow: rgb(0 0 0 / 3%) 0px 2px 3px 0px;
+}
+
+.petsitList .dateBar:focus {
+	outline: none;
+	border: 1.5px solid rgb(113, 162, 255);	
+}
+
+.petsitList .checkDate {
+	border: none;
+	text-align: center;
+	height: 56px;
+	width:200px;
+}
+
+.petsitList .checkDate:focus {
+	outline:none;
+	border-bottom: 3px solid rgb(113, 162, 255);
+}
+ 
+.petsitList .fas fa-arrow-right {
+     margin-top: 10px;
+}
+
+.petsitList .dateButton {
+	width: 23px;
+	height: 27px;
+	background-color: white;
+	border: none;
+	margin-top: 13px;
+	margin-left: 15px;
+}
+
+.petsitList .checkinCal {
+	height: 56px;
+	margine: none;
+	padding: none;
+}
+
+.petsitList .pointR {
+	padding: 17px 0px 0px
+}
+
+.petsitList .search ul, .search li {
+	list-style: none;
+	padding-left: 0px;
+	padding-right: 15px;
+	float: left;
+}
+
+.petsitList .search {
+	width: 100%;
+	height: 322px;
+	padding: 0px 0px;
+	border-bottom: 1px solid rgb(231, 233, 235);
+	box-shadow: rgb(0 0 0 / 5%) 0px 2px 20px;
+	margin-left: 115px;
+	margin-top: 40px;
+	text-align: center;
+}
+.petsitList .searchAddr {
+	float: left;
+	width: 650px;
+	padding: 25px;
+	text-align: left;
+}
+.petsitList .searchDate {
+	float: left;
+	width: 650px;
+	padding: 25px;
+	text-align: left;
+}
+.petsitList .searchCondition {
+	float: left;
+	width: 650px;
+	padding: 25px;
+	text-align: left;
+}
+.petsitList .condition {
+	width: 122px;
+    height: 55px;
+    line-height: 52px;
+    display: flex;
+	border: 1.5px solid #023047;
+	border-radius: 28px;
+	box-shadow: rgb(0 0 0 / 3%) 0px 2px 3px 0px;
+	text-align:center;
+	vertical-align:middle;
+    justify-content: center;
+    background-color: white;
+    font-size: 15px;
+    font-weight: 500;
+    color: rgb(187, 193, 204);
+    font-family: 'GmarketSansMedium';
+}
+
+.petsitList .condition:hover {	
+    border: 1.5px solid #023047;
+    color: #023047;
+}
+
+
+.petsitList .searchButton {
+	float: left;
+	width: 30%;
+	padding: 33px;
+	padding-right: 0px;
+}
+.petsitList .button {
+	width: 250px;
+    height: 60px;
+    line-height: 60px;
+    background: rgb(113, 162, 255);
+    margin-top: 25px;
+    border-radius: 7px;
+    display: flex;
+	text-align:center;
+	vertical-align:middle;
+    justify-content: center;
+    box-shadow: rgb(0 0 0 / 3%) 0px 2px 3px 0px;
+}
+
+
+.petsitList .petList {
+	width: 100%;
+	height: 550px;
+	padding: 25px;
+	margin-top: 50px;
+	border-bottom: 1px solid rgb(231, 233, 235);
+	box-shadow: rgb(0 0 0 / 5%) 0px 2px 20px;
+	text-align: rignt;
+}
+
+.petsitList .list-body {
+	width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 120px;
+}
+
+.petsitList .list-body {
+	display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 1024px;
+    margin-bottom: 29px;
+}
+
+.petsitList .list-title {
+	display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 1024px;
+    margin-bottom: 29px;
+}
+
+.petsitList .list-title p {
+	font-size: 13px;
+    color: rgb(57, 60, 71);
+    width: 1200px;
+    text-align: left;
+}
+
+.petsitList .list-titleR {
+	display: flex;
+    justify-content: space-between;
+    width: 203px;
+    align-items: center;
+}
+
+.petsitList .listbody{
+	display: flex;
+    margin-top: 55px;
+	
+}
+
+.petsitList .listEach{
+	width: 1028px;
+    height: 260px;
+    border: 1px solid rgb(235, 235, 235);
+    display: flex;
+    border-radius: 8px;
+    box-shadow: rgb(0 0 0 / 7%) 0px 0px 12px 0px;
+    position: relative;
+    align-items: center;
+}
+
+.petsitList .photo {
+	width: 390px;
+    height: 250px;
+    border-radius: 5px;
+    margin-left: 5px;
+    overflow: hidden;
+    position: relative;
+}
+
+.petsitList .photo img {
+	width: 390px;
+    height: 250px;
+	object-fit:cover;
+}
+
+
+.petsitList .listInfo-title {
+	width: 500px;
+    border-bottom: 1px solid rgb(235, 235, 235);
+    padding-bottom: 15px;
+    text-align: left;
+}
+
+.petsitList .listInfo-title p:first-child {
+	font-family: 'GmarketSansMedium';
+    font-size: 14px;
+    letter-spacing: -0.1px;
+    color: rgb(94, 99, 109);
+}
+
+.petsitList .listInfo-title p:last-child {
+	font-size: 20px;
+    font-family: 'GmarketSansMedium';
+    letter-spacing: -0.2px;
+    color: rgb(56, 60, 72);
+    margin-top: 9.5px;
+}
+
+.petsitList .listInfo-main {
+	display: flex;
+    justify-content: space-between;
+    width: 100%;
+    height: 100%;
+    padding-top: 48px;
+    padding-left: 7px;
+    
+}
+
+.petsitList .listEach a {
+	padding: 30px 33px 0px 38px;
+    height: 100%;
+    display: flex;
+    flex-grow: 1;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+.petsitList .main-L{
+	display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.petsitList .main-L p{
+	color: rgb(56, 60, 72);
+    font-size: 13px;
+    letter-spacing: -0.3px;
+    max-width: 560px;
+}
+.petsitList .left-bottom {
+	display: flex;
+    align-items: center;
+    flex-direction: row;
+    margin-bottom: 30px;
+}
+
+.petsitList .list-star {
+	width: 90px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.petsitList .left-bottom p {
+	font-family: "Noto Sans KR";
+    font-size: 12px;
+    line-height: 18px;
+    color: rgb(94, 99, 109);
+    letter-spacing: -0.2px;
+    margin: 0px 10px;  
+}
+    
+    
+.petsitList .searchPic {
+	width: 465px;
+	height: 320px;
+	object-fit:cover;
+	margin-left: 90px;
+}    
+    
+.petsitList .searchR {
+	width: 450px;
+	height: 300px;
+	float: left;
+}
+   
+.petsitList .searchL{
+	width: 700px;
+	height: 300px;
+	margin-right: 50px;
+	margin-left: 50px;
+	float: left;
+	padding: 0px 50px;
+}   
+   
+.petsitList .paging {
+	margin-top: 55px;
+}   
+  
+.petsitList .btn {
+	border: 1.5px solid #023047;
+	
+}
+  

@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mypage">
+	<!-- profile.jsp -->
+	<select id="selectDetail" parameterType="String" resultType="com.fin.app.mypage.Profile">
+		SELECT m.mId, m.mNick, m.mNum, md.mName, TO_CHAR(md.mBirth, 'YYYY-MM-DD') mBirth, md.mTel, md.mEmail, md.mZip, md.mAddr1, md.mAddr2, md.mProfileImg
+		FROM member m 
+		JOIN memberDetail md ON m.mId = md.mid 
+		WHERE m.mId = #{mId}
+	</select>
+	
+	<update id="updateDetail" parameterType="com.fin.app.mypage.Profile">
+		UPDATE memberdetail SET mName = #{mName}, mBirth = #{mBirth},  mZip = #{mZip}, mAddr1 = #{mAddr1}, 
+			mAddr2 = #{mAddr2}, mTel = #{mTel}, mEmail = #{mEmail}
+		WHERE mId = #{mId}
+	</update>
+	
+	<update id="updateNick" parameterType="com.fin.app.mypage.Profile">
+		UPDATE member SET mNick = #{mNick} 
+		WHERE mId = #{mId}
+	</update>
+	
+	<update id="updateProfileImg" parameterType="com.fin.app.mypage.Profile">
+		UPDATE memberdetail SET mProfileImg = #{mProfileImg} 
+		WHERE mId = #{mId}
+	</update>
+	
+	<!-- changePwd.jsp -->
+	<select id="selectCurrPwd" parameterType="String" resultType="String">
+		SELECT mPwd 
+		FROM member 
+		WHERE mId = #{mId}
+	</select>
+	
+	<update id="updatePwd" parameterType="com.fin.app.mypage.Profile">
+		UPDATE member SET mPwd = #{mPwd} 
+		WHERE mId = #{mId}
+	</update>
+	
+	<!-- storeList.jsp -->
+	<select id="storeDataCount" parameterType="map" resultType="Integer">
+		SELECT NVL(COUNT(*), 0)
+		FROM store s
+		JOIN storedetail sd ON sd.ordernum = s.ordernum
+		JOIN storedetailopt do ON do.storedetailoptnum = sd.storedetailoptnum
+		JOIN product p ON p.pnum = do.pnum
+		JOIN productImage img ON img.pnum = p.pnum
+		JOIN storesubopt so ON so.storesuboptnum = do.storesuboptnum
+		JOIN storemainopt mo ON mo.storemainoptnum = so.storemainoptnum
+		JOIN orderproduct op ON op.ordernum = s.ordernum
+		WHERE op.mnum = #{mNum}
+	</select>
+	
+	<select id="selectStoreList" parameterType="map" resultType="com.fin.app.mypage.Store">
+		SELECT s.orderNum, TO_CHAR(s.sDate, 'YYYY-MM-DD') sDate, sd.sdetailqty, sd.sdetailprice, p.pname, i.pimgname, so.storesuboptname, mo.storemainoptname, s.finalPrice, op.orderState, d.deliveryState
+		FROM store s
+		JOIN storedetail sd ON sd.ordernum = s.ordernum
+		JOIN storedetailopt do ON do.storedetailoptnum = sd.storedetailoptnum
+		JOIN product p ON p.pnum = do.pnum
+		JOIN storesubopt so ON so.storesuboptnum = do.storesuboptnum
+		JOIN storemainopt mo ON mo.storemainoptnum = so.storemainoptnum
+		JOIN orderproduct op ON op.ordernum = s.ordernum
+		JOIN delivery d ON d.ordernum = s.ordernum
+        LEFT OUTER JOIN (
+			SELECT pImgNum, pNum, pImgName FROM (
+				SELECT pImgNum, pNum, pImgName,
+					ROW_NUMBER() OVER(PARTITION BY pNum ORDER BY pImgName ASC) rank
+				 FROM productImage 
+			) WHERE rank = 1 
+		) i ON p.pnum = i.pnum
+		WHERE op.mnum = #{mNum}
+		ORDER BY s.sDate DESC, s.orderNum DESC
+		OFFSET #{offset} ROWS FETCH FIRST #{rows} ROWS ONLY
+	</select>
+	
+	<!-- petsitList.jsp -->
+	<select id="petsitDataCount" parameterType="map" resultType="Integer">
+		SELECT NVL(COUNT(*), 0)
+		FROM reservation r
+		JOIN petsit p  ON p.petNum = r.petNum
+		JOIN orderProduct op ON op.orderNum = r.orderNum
+		LEFT OUTER JOIN (
+			SELECT petImgNum, petNum, petImg FROM (
+				SELECT petImgNum, petNum, petImg,
+					ROW_NUMBER() OVER(PARTITION BY petNum ORDER BY petImg ASC) rank
+				 FROM petImage
+			) WHERE rank = 1
+		) i ON p.petNum = i.petNum
+		WHERE r.mnum = #{mNum}
+	</select>
+	
+	<select id="selectPetsitList" parameterType="map" resultType="com.fin.app.mypage.Petsit">
+		SELECT r.orderNum, TO_CHAR(r.checkIn, 'YYYY-MM-DD') checkIn, TO_CHAR(r.checkOut, 'YYYY-MM-DD') checkOut, TO_CHAR(r.rDate, 'YYYY-MM-DD') rDate, r.mNum, r.petNum, r.finalPrice , p.petTitle, i.petImg, op.orderState
+		FROM reservation r
+		JOIN petsit p  ON p.petNum = r.petNum
+		JOIN orderProduct op ON op.orderNum = r.orderNum
+		LEFT OUTER JOIN (
+			SELECT petImgNum, petNum, petImg FROM (
+				SELECT petImgNum, petNum, petImg,
+					ROW_NUMBER() OVER(PARTITION BY petNum ORDER BY petImg ASC) rank
+				 FROM petImage <!--ROW_NUMBER() OVER(PRTITION BY 그룹핑할 컬럼  ORDER BY 정렬할 컬럼  ASC(오름차순) :그룹짓고 그 안에서 순위매김. ROW_NUMBER(): 1등이 2명이어도 1,2등 나눔-->
+			) WHERE rank = 1 <!-- 순위가 1위인 것만 -->
+		) i ON p.petNum = i.petNum
+		WHERE r.mnum = #{mNum}
+		ORDER BY r.rDate DESC, r.orderNum DESC
+		OFFSET #{offset} ROWS FETCH FIRST #{rows} ROWS ONLY
+	</select>
+	
+	<!-- review.jsp -->
+	<select id="selectStoreReview" parameterType="Integer" resultType="Integer">
+		SELECT NVL(COUNT(s.orderNum),0)
+		FROM store s
+		JOIN review rv ON rv.orderNum = s.ordernum
+		WHERE s.orderNum = #{orderNum}
+	</select>
+	
+	<select id="selectPetsitReview" parameterType="Integer" resultType="Integer">
+		SELECT NVL(COUNT(r.orderNum),0)
+		FROM reservation r
+		JOIN review rv ON rv.orderNum = r.ordernum
+		WHERE r.orderNum = #{orderNum}
+	</select>
+	
+	
+	<insert id="insertReview" parameterType="com.fin.app.mypage.Review">
+		INSERT INTO review(rNum, rTitle, rContent, rGrade, rCreated, mId, orderNum) 
+			VALUES (#{rNum}, #{rTitle}, #{rContent}, #{rGrade}, SYSDATE, #{mId}, #{orderNum})
+	</insert>
+	
+	<insert id="insertReviewImage" parameterType="com.fin.app.mypage.Review">
+		INSERT INTO reviewImage(rImgNum, rNum, imagefilename) VALUES (RIMGNUM_SEQ.nextval, #{rNum}, #{imagefilename} )
+	</insert>
+	
+	<select id="seq" resultType="Integer">
+		SELECT REVIEW_SEQ.NEXTVAL FROM dual
+	</select>
+	
+	<!-- orderDetail.jsp -->
+	<select id="isPetsit" parameterType="Integer" resultType="Integer">
+		SELECT NVL(COUNT(*),0) 
+		FROM reservation 
+		WHERE orderNum = #{orderNum}
+	</select>
+	
+	<select id="selectDetailP" parameterType="Integer" resultType="com.fin.app.mypage.Detail">
+		SELECT r.orderNum, TO_CHAR(r.checkIn, 'YYYY-MM-DD') checkIn, TO_CHAR(r.checkOut, 'YYYY-MM-DD') checkOut, TO_CHAR(r.rDate, 'YYYY-MM-DD') rDate, r.mNum, r.petNum, r.finalPrice, r.small, r.medium, r.large, TO_DATE(r.checkOut, 'YYYY-MM-DD') - TO_DATE(r.checkIn, 'YYYY-MM-DD') gap,
+		        op.orderState, op.orderName, op.orderTel, op.orderEmail,
+		        p.petTitle,
+		        i.petImg
+		FROM reservation r
+		JOIN orderProduct op ON op.orderNum = r.orderNum
+		JOIN petsit p ON p.petNum = r.petNum
+		LEFT OUTER JOIN (
+			SELECT petImgNum, petNum, petImg FROM (
+				SELECT petImgNum, petNum, petImg,
+					ROW_NUMBER() OVER(PARTITION BY petNum ORDER BY petImg ASC) rank
+				 FROM petImage
+			) WHERE rank = 1
+		) i ON p.petNum = i.petNum
+		WHERE r.orderNum = #{orderNum}
+	</select>
+	
+	<select id="selectDetailS" parameterType="Integer" resultType="com.fin.app.mypage.Detail">
+		SELECT s.orderNum, s.sDate, s.sDelivCharge, s.sDelivDate, s.sZip, s.sAddr1, s.sAddr2, s.aMileNum, s.finalPrice, s.sTotPrice,
+				op.orderState, op.orderName, op.orderTel, op.orderEmail,
+				sd.sDetailQty, sd.sDetailPrice,
+				so.storeSubOptName,
+				mo.storeMainOptName,
+				p.pName, p.delivType,
+				am.aMilePrice, um.uMilePrice,
+				d.deliveryState,
+				i.pImgName
+		FROM store s
+		JOIN orderProduct op ON op.orderNum = s.orderNum
+		JOIN storeDetail sd ON sd.orderNum = s.orderNum
+		JOIN storeDetailOpt do ON do.storeDetailOptNum = sd.storeDetailOptNum
+		JOIN storeSubOpt so ON so.storeSubOptNum = do.storeSubOptNum
+		JOIN storeMainOpt mo ON mo.storeMainOptNum = so.storeMainOptNum
+		JOIN product p ON p.pNum = do.pNum
+		JOIN addedMileage am ON am.aMileNum = s.aMileNum
+		JOIN usedMileage um ON um.orderNum = s.orderNum
+		JOIN delivery d ON d.ordernum = s.ordernum
+		LEFT OUTER JOIN (
+			SELECT pImgNum, pNum, pImgName FROM (
+				SELECT pImgNum, pNum, pImgName,
+					ROW_NUMBER() OVER(PARTITION BY pNum ORDER BY pImgName ASC) rank
+				 FROM productImage 
+			) WHERE rank = 1 
+		) i ON p.pnum = i.pnum
+		WHERE s.orderNum = #{orderNum}
+	</select>
+	
+	<!-- mileage.jsp -->
+	<select id="mileageDataCount" parameterType="map" resultType="Integer">
+		SELECT NVL(COUNT(*),0) 
+		FROM (
+			SELECT mId, addType mileType, aMilePrice milePrice, TO_CHAR(aMileDate, 'YYYY-MM-DD') mileDate, aMileHistory mileHistory FROM addedMileage
+			UNION ALL
+			SELECT mId, useType, uMilePrice, TO_CHAR(uMileDate, 'YYYY-MM-DD'), uMileHistory FROM usedMileage
+		)
+		<where>
+			mId = #{mId} AND NOT milePrice = '0'
+			<if test=" keyword!=null and keyword != '' "> AND mileType = #{keyword} </if>
+		</where>
+	</select>
+	
+	<select id="selectAllMile" parameterType="map" resultType="com.fin.app.mypage.Mileage">
+		SELECT * 
+		FROM 
+		(
+   		 SELECT mId, aMileNum mileNum, addType mileType, aMilePrice milePrice, TO_CHAR(aMileDate, 'YYYY-MM-DD') mileDate, aMileHistory mileHistory FROM addedMileage 
+   		 UNION ALL
+   		 SELECT mId, uMileNum, useType, uMilePrice, TO_CHAR(uMileDate, 'YYYY-MM-DD'), uMileHistory FROM usedMileage
+		)		
+    	WHERE mId = #{mId}
+	</select>
+	
+	<select id="selectMile" parameterType="map" resultType="com.fin.app.mypage.Mileage">
+		SELECT * 
+		FROM 
+		(
+   		 SELECT mId, aMileNum mileNum, addType mileType, aMilePrice milePrice, TO_CHAR(aMileDate, 'YYYY-MM-DD') mileDate, aMileHistory mileHistory FROM addedMileage 
+   		 UNION ALL
+   		 SELECT mId, uMileNum, useType, uMilePrice, TO_CHAR(uMileDate, 'YYYY-MM-DD'), uMileHistory FROM usedMileage
+		)
+		<where>
+			mId = #{mId} AND NOT milePrice = '0'
+			<if test=" keyword!=null and keyword != '' "> AND mileType = #{keyword} </if>
+		</where>
+		ORDER BY mileNum DESC
+		OFFSET #{offset} ROWS FETCH FIRST #{rows} ROWS ONLY
+	</select>
+	
+
+</mapper>

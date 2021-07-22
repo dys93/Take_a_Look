@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="adminMember">
+	<select id="listMember" resultType="com.fin.app.admin.memberManagement.MemberManagement">
+		SELECT m.mId, m.mNick, mRole, mNum, TO_CHAR(mBirth, 'YYYY-MM-DD') mBirth, mName
+		FROM member m
+		JOIN memberDetail d ON m.mId = d.mId
+		WHERE mRole <![CDATA[ >= ]]> 1
+	</select>
+	
+	<select id="readMember" parameterType="String" resultType="com.fin.app.admin.memberManagement.MemberManagement">
+		SELECT mNum, m.mId, mNick, mName, mPwd, mState,
+			createdDate, lastLogin,
+			TO_CHAR(mBirth, 'YYYY-MM-DD') mBirth, mEmail, mTel, 
+			mZip, mAddr1, mAddr2
+		FROM member m
+		LEFT OUTER JOIN memberDetail d ON m.mId = d.mId
+		WHERE m.mId = #{mId}
+	</select>
+	
+	<select id="listMemberState" parameterType="String" resultType="com.fin.app.admin.memberManagement.MemberManagement">
+		SELECT msNum, mId, msCode, memo, registerId, registration_date
+		FROM memberState
+		WHERE mId = #{mId}
+		ORDER BY msNum DESC
+	</select>
+
+	<select id="readMemberState" parameterType="String" resultType="com.fin.app.admin.memberManagement.MemberManagement">
+		SELECT msNum, mId, msCode, memo, registerId, registration_date
+		FROM memberState
+		WHERE mId = #{mId}
+		ORDER BY msNum DESC
+		FETCH FIRST 1 ROWS ONLY
+	</select>
+	
+    <update id="updateMemberState" parameterType="map">
+		UPDATE member SET mState=#{mState} WHERE mId=#{mId}
+    </update>
+    
+	<insert id="insertMemberState" parameterType="com.fin.app.admin.memberManagement.MemberManagement">
+		INSERT INTO memberState(msNum, mId, msCode, memo, registerId)
+		VALUES (memberState_seq.NEXTVAL, #{mId}, #{msCode}, #{memo}, #{registerId})
+	</insert>
+	
+</mapper>

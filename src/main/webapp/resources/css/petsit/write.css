@@ -1,0 +1,162 @@
+@charset "UTF-8";
+
+.petsitWrite {
+	font-size: 15px;
+	//font-family: "Spoqa Han Sans", "Noto Sans KR", sans-serif !important;
+	color: rgb(57, 60, 71);
+	font-family: "Cafe24SsurroundAir""
+}
+
+.petsitWrite .body-title {
+	width: 900px;
+	margin: 0 auto;	
+}
+
+.petsitWrite .write {
+	width: 900px;
+	margin-top: 50px;
+	text-align: left;
+	margin-bottom: 25px;
+	font-family: 'GmarketSansMedium';
+	
+}
+
+.petsitWrite .table {
+	width: 100%;
+	border-spacing: 0;
+	border-collapse: collapse;
+	margin: 0 0;
+}
+
+.petsitWrite .table-content {
+	margin-top: 25px;
+}
+	border-bottom: 1px solid #ccc;
+	height: 40px;
+}
+.petsitWrite .table-content tr:first-child {
+	border-top: 1px solid #ccc;
+}
+.petsitWrite .table-content tr:last-child {
+	border-bottom: 1px solid #ccc;
+}
+.petsitWrite .table-content tr > td {
+	padding: 5px 0;
+}
+.petsitWrite .table-content tr > td:nth-child(1) {
+	width: 100px;
+	text-align: center;
+	background: #eee;
+}
+.petsitWrite .table-content tr > td:nth-child(2) {
+	padding-left: 10px;
+}
+.petsitWrite .table-content input[type=text], .table-content input[type=file], .table-content textarea {
+	width: 97%;
+}
+
+.petsitWrite .table-footer {
+	margin: 0px auto;
+}
+.petsitWrite .table-footer tr {
+	height:45px;
+	text-align: center;
+}
+
+.petsitWrite .spaceNeed {
+	width: 100px;
+	display: inline-block;
+}
+
+
+.petsitWrite .uploadedImg {
+	max-width: 600px;
+	padding: 5px;
+	box-sizing: border-box;
+	display: flex; /* 자손요소를 flexbox로 변경 */
+	flex-direction: row; /* 정방향 수평나열 */
+	flex-wrap: nowrap;
+	overflow-x: auto;
+}
+
+.petsitWrite .uploadedImg .delete-img {
+	width: 55px; height: 55px;
+	margin-right: 5px;
+	flex: 0 0 auto;
+	cursor: pointer;
+}
+
+.petsitWrite .NboxTF {
+	width: 870px;
+	min-height:43px; 
+	box-shadow: rgb(0 0 0 / 3%) 0px 2px 3px 0px;
+	border: 1.5px solid #8C8C8C;
+}
+
+.petsitWrite .ahead {
+	width: 200px;
+	height: 60px;
+	vertical-align: middle;
+	text-align: center;
+	font-family: 'GmarketSansMedium';
+}
+
+.petsitWrite .needVer {
+	vertical-align: middle;
+}
+
+
+.petsitWrite .boxShort{
+	width: 220px;
+	min-height:43px; 
+}
+
+.petsitWrite .boxContent {
+	width: 870px;
+	min-height:400px; 
+	box-shadow: rgb(0 0 0 / 3%) 0px 2px 3px 0px;
+	border: 1.5px solid #8C8C8C;
+}
+
+
+.petsitWrite .needCol {
+	box-shadow: rgb(0 0 0 / 3%) 0px 2px 3px 0px;
+	border: 1.5px solid #8C8C8C;
+}
+
+
+
+.petsitWrite input[type=radio]{
+    background-color: orange;
+    width: 14px;
+    height: 14px;
+}
+
+.petsitWrite input[type=radio]:checked{
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    border: none;
+    width: 14px;
+    height: 14px;
+    border-radius: 100%;
+}
+
+.petsitWrite input[type=checkbox]{
+    background-color: orange;
+    width: 14px;
+    height: 14px;
+}
+
+.petsitWrite input[type=checkbox]:checked{
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    border: none;
+    width: 14px;
+    height: 14px;
+}
+
+
+.petsitWrite .tip {
+	color: orange;
+	font-family: 'GmarketSansMedium';
+}

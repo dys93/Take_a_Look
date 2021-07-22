@@ -1,0 +1,129 @@
+@charset "UTF-8";
+
+.fixed-top {
+	position: relative;
+	top: 0;
+	left: 0;
+	right: 0;
+}
+
+.flex-center {
+	display: flex;
+	align-items: center;
+}
+.justify-content-center  {
+	justify-content: center;
+}
+
+.clear {
+	clear: both;
+}
+
+.top-bar {
+	background: orange;
+	  padding: 10px 0;
+	  font-size: 14px;
+	  color: #fff;
+	  width: 100%;
+	  height: 70px;
+}
+.top-bar .top-info{
+	margin-right: auto;
+}
+.top-bar .top-links{
+	font-size: 17px;
+    height: 50px;
+    font-size: 20px;
+    padding-top: 15px;
+}
+
+.top-bar .top-links a {
+    color: rgba(255, 255, 255, 0.6);
+    padding-left: 15px;
+    display: inline-block;
+    line-height: 1px;
+    transition: 0.3s;
+}
+.top-bar .top-links a:hover {
+  	color: #fff;
+}
+.top-bar.topbar-scrolled {
+  	top: -40px;
+}
+
+.container {
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+@media (min-width: 576px) {
+	.container {
+	    max-width: 540px;
+	}
+}
+@media (min-width: 768px) {
+	.container {
+	    max-width: 720px;
+	}
+}
+@media (min-width: 992px) {
+	.container {
+		max-width: 960px;
+	}
+}
+@media (min-width: 1200px) {
+	.container {
+	    max-width: 1140px;
+	}
+}
+
+/**/
+
+@font-face {
+    font-family: 'Cafe24Ssurround';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2105_2@1.0/Cafe24Ssurround.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.storeHeader{
+	font-family: Cafe24Ssurround, sans-serif;
+}
+.title{
+	padding-right: 10px;
+	padding-left: 200px;
+}
+
+.headerBottom{
+	position: relative;
+    height: 70px;
+    line-height: 40px;
+    font-size: 20px;	
+}
+
+.titleTop{
+	color: wheat;
+}
+
+.mainBtn{
+	margin-right: 200px;
+    border: none;
+    color: whitesmoke;
+    border-radius: 5px;
+    font-size: 17px; 
+	background: #023047;
+	box-shadow:inset -2px -2px 7px 1px rgb(0 0 0 / 10%), 4px 3px 7px 1px rgb(0 0 0 / 10%);
+	transition: 0.3s;  
+
+}
+.mainBtn:hover{
+    color: whitesmoke;
+	background: #073f5a;
+	box-shadow: inset -5px -3px 7px 1px rgb(0 0 0 / 10%),4px 3px 7px 1px rgb(0 0 0 / 10%);	
+	
+}
+
+
+

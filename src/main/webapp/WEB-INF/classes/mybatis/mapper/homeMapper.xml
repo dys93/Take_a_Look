@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="home">
+	<select id="bestStore" resultType="com.fin.app.Home">
+		SELECT ROWNUM, a.*, p.pNum, pName, pPrice, pCateNum, pDiscountRate, pDetailPrice, pImgName
+		FROM ( SELECT storeDetailOptNum, RANK() OVER (ORDER BY SUM(sDetailQty) DESC) rank, SUM(sDetailQty) sumQty FROM storeDetail GROUP BY storeDetailOptNum ) a 
+        LEFT OUTER JOIN storeDetailOpt d ON a.storeDetailOptNum = d.storeDetailOptNum
+        JOIN product p ON d.pNum = p.pNum
+		JOIN ( SELECT pImgNum, pNum, pImgName FROM ( SELECT pImgNum, pNum, pImgName,
+        	ROW_NUMBER() OVER(PARTITION BY pNum ORDER BY pImgNum ASC) rank FROM productImage ) WHERE rank = 1 ) i 
+        	ON p.pNum = i.pNum
+		WHERE ROWNUM <![CDATA[ <= ]]> 4
+		ORDER BY sumQty DESC
+	</select>
+	
+	<select id="bestPetsit" resultType="com.fin.app.Home">
+        SELECT ROWNUM, a.*, p.mId, p.petTitle, m.mNick, petImg
+		FROM ( SELECT petNum, RANK() OVER (ORDER BY NVL(COUNT(*), 0) DESC) rank, NVL(COUNT(*), 0) count FROM reservation GROUP BY petNum) a
+        JOIN petsit p ON a.petNum = p.petNum
+        JOIN member m ON p.mId = m.mId
+        LEFT OUTER JOIN ( SELECT petImgNum, petNum, petImg FROM ( SELECT petImgNum, petNum, petImg,
+        	ROW_NUMBER() OVER(PARTITION BY petNum ORDER BY petImg ASC) rank FROM petImage ) WHERE rank = 1 ) i 
+        	ON p.petNum = i.petNum
+        WHERE ROWNUM <![CDATA[ <= ]]> 4
+        ORDER BY count DESC
+	</select>
+	
+</mapper>

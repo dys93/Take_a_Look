@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="adminSaleStatus">
+	<select id="freeDelivCount" parameterType="String" resultType="Integer">
+		SELECT NVL(COUNT(*), 0)
+		FROM store s
+		JOIN storeDetail d ON s.orderNum = d.orderNum
+		JOIN storeDetailOpt o ON d.storeDetailOptNum = o.storeDetailOptNum
+		JOIN product p ON o.pNum = p.pNum 
+		WHERE delivType = 0 AND TO_CHAR(sDate, 'yyyy-mm-dd') = '${sDate}'
+	</select>
+
+	<select id="normalDelivCount" parameterType="String" resultType="Integer">
+		SELECT NVL(COUNT(*), 0)
+		FROM store s
+		JOIN storeDetail d ON s.orderNum = d.orderNum
+		JOIN storeDetailOpt o ON d.storeDetailOptNum = o.storeDetailOptNum
+		JOIN product p ON o.pNum = p.pNum 
+		WHERE delivType = 1 AND TO_CHAR(sDate, 'yyyy-mm-dd') = '${sDate}'
+	</select>
+	
+	<select id="bestProduct" resultType="com.fin.app.admin.Admin">
+		SELECT ROWNUM, a.*, p.pNum, p.pCateNum, p.pName
+		FROM ( SELECT storeDetailOptNum, RANK() OVER (ORDER BY SUM(sDetailQty) DESC) rank, SUM(sDetailQty) sumQty FROM storeDetail GROUP BY storeDetailOptNum ) a 
+        LEFT OUTER JOIN storeDetailOpt d ON a.storeDetailOptNum = d.storeDetailOptNum
+        JOIN product p ON d.pNum = p.pNum
+		WHERE ROWNUM <![CDATA[ <= ]]> 6
+		ORDER BY sumQty DESC
+	</select>
+	
+</mapper>

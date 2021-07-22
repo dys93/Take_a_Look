@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="adminProduct">
+	<select id="listProduct" resultType="com.fin.app.admin.productManagement.ProductManagement">
+		SELECT pNum, pName, delivType, pCateName, pDate
+		FROM product p
+		JOIN productCategory c ON p.pCateNum = c.pCateNum
+	</select>
+	
+	<select id="readProduct" parameterType="Integer" resultType="com.fin.app.admin.productManagement.ProductManagement">
+		SELECT p.pNum, pName, pPrice, pDiscountRate, delivType, pDate,
+			pDetailCnt, pDetailPrice
+		FROM product p
+		JOIN storeDetailOpt d ON p.pNum = d.pNum
+		WHERE p.pNum = #{pNum}
+	</select>
+	
+    <update id="updateProductState" parameterType="com.fin.app.admin.productManagement.ProductManagement">
+		UPDATE product SET pPrice = ${pPrice}, pDiscountRate = ${pDiscountRate} 
+		WHERE pNum = #{pNum}
+    </update>
+    
+    <update id="updateProductDetail" parameterType="com.fin.app.admin.productManagement.ProductManagement">
+		UPDATE storeDetailOpt SET pDetailCnt = ${pDetailCnt}, pDetailPrice = ${pDetailPrice}
+		WHERE pNum = #{pNum}
+    </update>
+	
+</mapper>

@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="petsit">
+	<!-- 펫시터 글등록 -->
+	<select id="seq" resultType="Integer">
+		SELECT petsit_seq.NEXTVAL FROM dual
+	</select>
+	
+	<insert id="insertPetsit" parameterType="com.fin.app.petsit.Petsit">
+		INSERT INTO petsit(petNum, petYN, petYard, petLarge, petTitle, petContent, petFamily, petWalk,petLiving, petChild, petCertif, mId, petAct, petAddr)
+		VALUES(#{petNum}, #{petYN}, #{petYard}, #{petLarge}, #{petTitle}, #{petContent},#{petFamily}, #{petWalk},#{petLiving}, #{petChild},
+		#{petCertif}, #{mId}, #{petAct}, #{petAddr})	
+	</insert>
+	
+	<insert id="insertPetSchedule" parameterType="com.fin.app.petsit.Petsit">
+		INSERT INTO petSchedule(petNum, mon, tue, wed, thu, fri, sat, sun)
+		VALUES(#{petNum}, #{mon}, #{tue}, #{wed}, #{thu}, #{fri},#{sat}, #{sun})	
+	</insert>
+	
+	<update id="updateOn" parameterType="com.fin.app.petsit.Petsit">
+		UPDATE petDetail SET petOnoff = 1  
+		WHERE mId = #{mId}
+	</update>
+		
+	<update id="updateOff" parameterType="com.fin.app.petsit.Petsit">
+		UPDATE petDetail SET petOnoff = 0  
+		WHERE mId = #{mId}
+	</update>
+	
+	<!-- 데이터 개수 -->
+	<select id="dataCount" parameterType="map" resultType="Integer">
+		SELECT NVL(COUNT(*),0) <!-- NVL=null값을 다른 값으로 치환. COUNT(*)가 null값이면 0으로 치환 -->
+		FROM petsit
+		<where>	
+			<if test="addr != null and addr !=''">
+				INSTR(petAddr, #{addr}) &gt; 0
+			</if>
+			<if test="conList != null ">
+				AND 
+				(
+					<foreach collection="conList" item="condition" separator="AND">
+						${condition} = 1 
+					</foreach>
+				)
+			</if>			
+		</where>
+	</select>
+	
+	<!-- 펫시터 리스트  --><!-- 사진,주소,제목,조건들,글번호 => petsit테이블, petImage테이블 조인-->
+	<select id="listPetsit" parameterType="map" resultType="com.fin.app.petsit.Petsit">
+		SELECT petImgNum, petImg, petTitle, petAddr, petYN, petYard, petLarge, petFamily, petWalk, petLiving, petChild, mId, s.petNum
+		FROM petsit s
+		LEFT OUTER JOIN (
+			SELECT petImgNum, petNum, petImg FROM (
+				SELECT petImgNum, petNum, petImg,
+					ROW_NUMBER() OVER(PARTITION BY petNum ORDER BY petImg ASC) rank
+				 FROM petImage <!--ROW_NUMBER() OVER(PRTITION BY 그룹핑할 컬럼  ORDER BY 정렬할 컬럼  ASC(오름차순) :그룹짓고 그 안에서 순위매김. ROW_NUMBER(): 1등이 2명이어도 1,2등 나눔-->
+			) WHERE rank = 1 <!-- 순위가 1위인 것만 -->
+		) i ON s.petNum = i.petNum
+		<where>	
+			<if test="addr != null and addr !=''">
+				INSTR(petAddr, #{addr}) &gt; 0
+			</if>
+			<if test="conList != null ">
+				AND 
+				(
+					<foreach collection="conList" item="condition" separator="AND">
+						${condition} = 1 
+					</foreach>
+				)
+			</if>		
+		</where>
+		ORDER BY petNum DESC <!-- 글번호 내림차순으로 정렬 -->
+		OFFSET #{offset} ROWS FETCH FIRST #{rows} ROWS ONLY	<!-- 페이징 -->
+	</select>
+	
+	<!-- 펫시터 글보기 --><!-- petsit, schedule조인 이미지는 밑에 따로 -->	
+	<select id="readPetsit" parameterType="Integer" resultType="com.fin.app.petsit.Petsit">
+		SELECT s.petNum, petTitle, petContent, petAddr, petYN, petYard, petLarge, petFamily, petWalk, petLiving, petChild, petCertif, s.mId,
+				mon, tue, wed, thu, fri, sat, sun, mAddr1, mAddr2, mProfileImg, mName, mTel, mZip, mEmail, mBirth, mNick
+		FROM petsit s
+		JOIN petSchedule d ON s.petNum = d.petNum	
+		JOIN memberDetail md ON s.mId = md.mId
+		JOIN member  mb ON s.mId = mb.mId
+		WHERE s.petNum = #{s.petNum}
+	</select>
+		
+	<!-- 펫시터 수정 -->
+	<update id="updatePetsit" parameterType="com.fin.app.petsit.Petsit">
+		UPDATE petsit SET petTitle=#{petTitle}, petContent=#{petContent}, petAddr=#{petAddr}, petYN=#{petYN}, petYard=#{petYard}, petLarge=#{petLarge}, 
+		petFamily=#{petFamily}, petWalk=#{petWalk}, petLiving=#{petLiving}, petChild=#{petChild} 
+		WHERE petNum=#{petNum}
+	</update>
+	
+	<update id="updateSchedule" parameterType="com.fin.app.petsit.Petsit">
+		UPDATE petSchedule SET mon=#{mon}, tue=#{tue}, wed=#{wed}, thu=#{thu}, fri=#{fri}, sat=#{sat}, sun=#{sun}
+		WHERE petNum = #{petNum}
+	</update>
+	
+	<!-- 펫시터 삭제 -->
+	<delete id="deletePetsit" parameterType="Integer">
+		DELETE FROM petsit WHERE petNum=#{petNum}
+	</delete>
+	
+	<!--펫시터 파일 -->
+	<insert id="insertFile" parameterType="com.fin.app.petsit.Petsit">
+		INSERT INTO petImage(petImgNum, petNum, petImg) VALUES
+				(petImage_seq.NEXTVAL, #{petNum}, #{petImg})
+	</insert>	
+	
+	<select id="listFile" parameterType="Integer" resultType="com.fin.app.petsit.Petsit">
+      SELECT petImgNum, petNum, petImg
+      FROM petImage
+      WHERE petNum=#{petNum}
+   </select>   
+   
+   <select id="readFile" parameterType="Integer" resultType="com.fin.app.petsit.Petsit">
+		SELECT petImgNum, petNum, petImg
+		FROM petImage
+	    WHERE petImgNum=#{petImgNum}      
+	</select>
+	
+   	<delete id="deleteFile" parameterType="map">
+		DELETE FROM petImage WHERE ${field} = #{petNum}
+	</delete>
+	
+	<!-- 리뷰 part -->
+	
+	<!-- 리뷰 데이터  -->
+	<select id="rDataCount" parameterType="map" resultType="Integer">
+		SELECT NVL(COUNT(*),0) <!-- NVL=null값을 다른 값으로 치환. COUNT(*)가 null값이면 0으로 치환 -->
+		FROM review r
+		JOIN reservation rv ON r.orderNum = rv.orderNum 		
+		WHERE petNum=#{petNum}
+	</select>
+	
+	<!-- 리뷰 리스트  --><!-- review, reviewImage 조인 -->
+	<select id="listReview" parameterType="map" resultType="com.fin.app.petsit.PetsitReview">
+		SELECT r.rNum, imagefilename, rTitle, rContent, rGrade, rCreated, r.mId ,rv.orderNum,
+            	checkIn, checkOut, mb.mNum, petNum, finalPrice, rDate, mProfileImg, mb.mNick
+		FROM review r
+		JOIN memberDetail md ON r.mId = md.mId
+		JOIN member mb ON r.mId = mb.mId
+		LEFT OUTER JOIN (
+    		SELECT rNum, LISTAGG(imagefilename, ',') WITHIN GROUP(ORDER BY rNum) imagefilename
+    		FROM reviewImage
+   			GROUP BY rNum
+		) ri ON r.rNum = ri.rNum		
+		JOIN reservation rv ON r.orderNum = rv.orderNum 
+        WHERE petNum=#{petNum}
+		ORDER BY rNum DESC
+		OFFSET #{offset} ROWS FETCH FIRST #{rows} ROWS ONLY
+	</select>
+	
+	<!-- 예약 part -->
+	<select id="orderSeq" resultType="Integer">
+		SELECT order_seq.NEXTVAL FROM dual
+	</select>
+	
+	<select id="readMnum" resultType="Integer" parameterType="String">
+		SELECT mNum FROM member WHERE mId = #{mId}
+	</select>
+	
+	<select id="readPetNum" resultType="Integer" parameterType="String">
+		SELECT petNum FROM petsit WHERE mId = #{mId}
+	</select>
+
+	<insert id="insertOrderProduct" parameterType="com.fin.app.petsit.Reservation">
+		INSERT INTO orderProduct(orderNum, mNum, orderState, orderName, orderTel, orderEmail)
+		VALUES(#{orderNum}, #{mNum}, 1, #{orderName},#{orderTel}, #{orderEmail})		
+	</insert>
+	
+	<insert id="insertReservation" parameterType="com.fin.app.petsit.Reservation">
+		INSERT INTO reservation(orderNum, checkIn, checkOut, mNum, petNum, finalPrice, rDate, small, medium, large)
+		VALUES(#{orderNum}, #{checkIn}, #{checkOut}, #{mNum}, #{petNum}, #{finalPrice},#{rDate},#{small},#{medium},#{large})	
+	</insert>
+	
+	
+</mapper>

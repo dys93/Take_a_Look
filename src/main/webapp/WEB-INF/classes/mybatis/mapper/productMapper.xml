@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="product">
+
+	<select id="seq" resultType="Integer">
+		SELECT product_seq.NEXTVAL FROM dual
+	</select>
+
+	<!-- 상품 정보 -->
+	<insert id="insertProduct" parameterType="com.fin.app.product.Product">
+		INSERT INTO product(pNum, pCateNum, pName, pPrice, pDiscountRate, pContent, delivType, pDate, pVisible)
+		VALUES(#{pNum}, #{pCateNum}, #{pName}, #{pPrice}, #{pDiscountRate}, #{pContent},
+		 #{delivType}, SYSDATE, 0)
+	</insert>
+
+	<!-- 검색조건 -->
+	<sql id="where-list">
+		<if test="condition == 'title'">
+			INSTR(pName, #{keyword}) &gt; 0
+		</if>
+	</sql>
+
+	<select id="dataCount" parameterType="map" resultType="Integer">
+		SELECT NVL(COUNT(*), 0)
+		FROM product p
+		JOIN storeDetailOpt d ON p.pNum = d.pNum
+		<where>
+			<if test="pCateNum!=null and pCateNum != 0">
+				pCateNum = #{pCateNum}
+			</if>		
+			<if test="keyword != null and keyword != '' ">
+				AND<include refid="where-list"/>
+			</if>
+		</where>
+	</select>
+
+	<!-- 전체리스트 -->
+	<select id="listProduct" parameterType="map" resultType="com.fin.app.product.Product">
+		SELECT p.pNum, pCateNum, pName, pPrice, pDetailPrice, pDiscountRate, pImgName, pDate
+		FROM product p
+		JOIN storeDetailOpt d ON p.pNum = d.pNum
+		LEFT OUTER JOIN (
+			SELECT pImgNum, pImgName, pNum FROM(
+				SELECT pImgNum, pImgName, pNum,
+					ROW_NUMBER() OVER(PARTITION BY pNum ORDER BY pImgNum ASC)rank
+				 FROM productImage
+			) WHERE rank = 1
+		) i ON p.pNum = i.pNum
+		<where>
+			<if test="pCateNum!=null and pCateNum != 0">
+				pCateNum = #{pCateNum}
+			</if>		
+			<if test="keyword != null and keyword != '' ">
+				AND<include refid="where-list"/>
+			</if>
+		</where>
+		ORDER BY pNum DESC
+		OFFSET #{offset} ROWS FETCH FIRST #{rows} ROWS ONLY
+	</select>
+	
+	<!-- 글보기 -->
+	<select id="readProduct" parameterType="Integer" resultType="com.fin.app.product.Product">
+		SELECT p.pNum, pName, pCateNum, pDiscountRate, pContent, pPrice, pDetailPrice
+        ,pDetailCnt,delivType, s.storeSubOptNum, m.storeMainOptNum, storeDetailOptNum
+		FROM product p
+		JOIN storeDetailOpt d ON p.pNum = d.pNum
+        JOIN storeSubOpt s ON d.storeSubOptNum = s.storeSubOptNum
+        JOIN storeMainOpt m ON s.storeMainOptNum = m.storeMainOptNum	
+		WHERE p.pNum = #{pNum}
+	</select>
+
+	<!-- 글수정 -->
+	<update id="updateProduct" parameterType="com.fin.app.product.Product">
+		UPDATE product SET pCateNum = #{pCateNum}, pName=#{pName}, pPrice=#{pPrice}, pDiscountRate=#{pDiscountRate}, pContent=#{pContent},
+		delivType=#{delivType}
+		WHERE pNum=#{pNum}
+	</update>
+	
+	<!-- 글삭제 -->
+	<delete id="deleteProduct" parameterType="Integer">
+		DELETE FROM product WHERE pNum=#{pNum}	
+	</delete>
+
+	<!-- 카테고리 -->
+	<select id="listCategory" resultType="com.fin.app.product.Product">
+		SELECT pCateNum, pCateName FROM productCategory
+	</select>		
+	
+	<!-- 옵션 -->
+	<select id="listMainOpt" resultType="com.fin.app.product.Product">
+		SELECT storeMainOptNum, storeMainOptName FROM storeMainOpt
+	</select>	
+
+	<select id="listSubOpt"  parameterType="map" resultType="com.fin.app.product.Product">
+		SELECT storeSubOptNum, storeSubOptName, storeMainOptNum 
+		FROM storeSubOpt
+		WHERE storeMainOptNum = #{storeMainOptNum}
+	</select>	
+	 
+	 <!-- 상품상세정보 --> 
+	<insert id="insertStoreDetail" parameterType="com.fin.app.product.Product">
+		INSERT INTO storeDetailOpt(storeDetailOptNum, storeSubOptNum, pNum, pDetailCnt, pDetailPrice)
+		VALUES(storeDetailOpt_seq.NEXTVAL, #{storeSubOptNum}, #{pNum}, #{pDetailCnt}, #{pDetailPrice})
+	</insert>
+	
+	<update id="updateStoreDetail" parameterType="com.fin.app.product.Product">
+		UPDATE storeDetailOpt SET storeSubOptNum=#{storeSubOptNum}, pDetailCnt=#{pDetailCnt}, pDetailPrice=#{pDetailPrice}
+		WHERE pNum = #{pNum}
+	</update>
+		
+	<!-- 사진파일 -->
+	<insert id="insertProductImage" parameterType="com.fin.app.product.Product">
+		INSERT INTO productImage(pImgNum, pImgName, pNum)
+		VALUES(productImage_seq.NEXTVAL, #{pImgName}, #{pNum})
+	</insert>	
+	
+	<select id="listProductImage" parameterType="Integer" resultType="com.fin.app.product.Product">
+		SELECT pImgNum, pImgName, pNum
+		FROM productImage
+		WHERE pNum=#{pNum}
+	</select>
+	
+	<select id="readProductImage" parameterType="Integer" resultType="com.fin.app.product.Product">
+		SELECT pImgNum, pImgName, pNum
+		FROM productImage
+		WHERE pImgNum = #{pImgNum}
+	</select>
+	
+	<delete id="deleteProductImage" parameterType="map">
+		DELETE FROM productImage WHERE ${field} = #{pNum}
+	</delete>
+
+	
+	<!-- 구매할 상품 불러오기 -->
+	<select id="selectedProduct" parameterType="Integer" resultType="com.fin.app.product.Product">
+		SELECT p.pNum, pName, pCateNum, pDiscountRate, pPrice, pDetailPrice, pImgName
+        ,pDetailCnt,delivType, s.storeSubOptNum, m.storeMainOptNum, storeDetailOptNum
+		FROM product p
+		JOIN storeDetailOpt d ON p.pNum = d.pNum
+        JOIN storeSubOpt s ON d.storeSubOptNum = s.storeSubOptNum
+        JOIN storeMainOpt m ON s.storeMainOptNum = m.storeMainOptNum
+        JOIN productImage i on p.pNum = i.pNum
+		WHERE p.pNum = #{pNum}
+	</select>
+
+	<!-- 회원정보 불러오기 -->
+	<select id="readMember" parameterType="String" resultType="com.fin.app.product.Product">
+		SELECT mNum, mName, mTel, mZip, mAddr1, mAddr2, mEmail, m.mId
+		FROM member m
+		JOIN memberDetail m2 ON m.mId = m2.mId
+		WHERE m.mId = #{mId}
+	</select>
+
+	<!-- orderNum의 시퀀스 -->
+	<select id="orderSeq" resultType="Integer">
+		SELECT order_seq.NEXTVAL FROM dual
+	</select>
+
+
+	<!-- 주문, 스토어주문, 주문상세 배송 -->
+	<insert id="insertOrderProduct" parameterType="com.fin.app.product.Product">
+		INSERT INTO orderProduct(orderNum, mNum, orderState, orderName, orderTel, orderEmail)
+		VALUES(#{orderNum}, #{mNum}, 1, #{orderName}, #{orderTel}, #{orderEmail} )
+	</insert>
+	
+	<insert id="insertStore" parameterType="com.fin.app.product.Product">
+		INSERT INTO store(orderNum, sDate, sTotPrice, sDelivCharge,
+		 sDelivDate, sZip, sAddr1, sAddr2, aMileNum, finalPrice)
+		 VALUES(#{orderNum}, SYSDATE, #{sTotPrice}, #{sDelivCharge},
+		  #{sDelivDate}, #{sZip}, #{sAddr1}, #{sAddr2}, #{aMileNum}, #{finalPrice})
+	</insert>
+
+	<insert id="insertStoreDetails" parameterType="com.fin.app.product.Product">
+		INSERT INTO storeDetail(orderNum, storeDetailOptNum, sDetailQty, sDetailPrice)
+		VALUES(#{orderNum}, #{storeDetailOptNum}, #{sDetailQty}, #{sDetailPrice} )
+	</insert>
+
+	<insert id="insertDelivery" parameterType="com.fin.app.product.Product" >
+		INSERT INTO delivery(transportNum, orderNum, deliveryState)
+		VALUES(delivery_seq.NEXTVAL, #{orderNum}, 0)
+	</insert>
+
+	<!-- 보유 마일리지 불러오기 -->
+	<select id="listMileage" parameterType="String" resultType="com.fin.app.product.Product">
+		SELECT aMilePrice FROM addedMileage 
+		WHERE mId = #{mId}	
+	</select>
+
+	<!-- 사용했던 마일리지 불러오기 -->
+	<select id="useListMileage" parameterType="String" resultType="com.fin.app.product.Product">
+		SELECT uMilePrice FROM usedMileage
+		WHERE mId = #{mId}
+	</select>
+
+	<select id="addMileSeq" resultType="Integer">
+		SELECT aMileNum_seq.NEXTVAL FROM dual		
+	</select>
+
+	<!-- 마일리지 적립 -->
+	<insert id="addMileage" parameterType="com.fin.app.product.Product">
+		INSERT INTO addedMileage(aMileNum, addType, aMilePrice, aMileDate, aMileHistory, mId)
+		VALUES(#{aMileNum}, 1, #{aMilePrice}, SYSDATE, '상품 구매 마일리지', #{mId} )
+	</insert>
+
+	<!-- 마일리지 사용 -->
+	<insert id="usedMileage" parameterType="com.fin.app.product.Product">
+		INSERT INTO usedMileage(uMileNum, useType, uMilePrice, uMileDate, uMileHistory, mId, orderNum)
+		VALUES(aMileNum_seq.NEXTVAL, 0, #{uMilePrice}, SYSDATE, '마일리지 사용', #{mId}, #{orderNum} )
+	</insert>
+
+	<!-- 리뷰 데이터  -->
+	<select id="rDataCount" parameterType="Integer" resultType="Integer">
+		SELECT NVL(COUNT(*),0) 
+		FROM review r
+		JOIN storeDetail sd ON r.orderNum = sd.orderNum 
+    	JOIN storeDetailOpt do ON sd.storeDetailOptNum = do.storeDetailOptNum 		
+        WHERE pNum= #{pNum}
+	</select>
+
+	<select id="listReview" parameterType="map" resultType="com.fin.app.product.ProductReview">
+	 SELECT r.rNum, imagefilename, rTitle, rContent, rGrade, rCreated, r.mId, sd.orderNum , do.pNum, mProfileImg, mNick
+      FROM review r
+	  JOIN memberDetail md ON r.mId = md.mId 
+	  JOIN member m ON md.mId = m.mId     
+      LEFT OUTER JOIN (
+          SELECT rNum, LISTAGG(imagefilename, ',') WITHIN GROUP(ORDER BY rNum) imagefilename
+          FROM reviewImage
+            GROUP BY rNum
+      ) ri ON r.rNum = ri.rNum      
+      	JOIN storeDetail sd ON r.orderNum = sd.orderNum 
+        JOIN storeDetailOpt do ON sd.storeDetailOptNum = do.storeDetailOptNum 
+        WHERE pNum= #{pNum}
+      	ORDER BY rNum DESC
+		OFFSET #{offset} ROWS FETCH FIRST #{rows} ROWS ONLY 
+	</select>
+	
+	<!-- product 메인 상품 리스트 -->
+	
+	<select id="listBestProduct" resultType="com.fin.app.product.Product">
+		SELECT ROWNUM, a.*, p.pNum, pName, pPrice, pCateNum, pDiscountRate, pDetailPrice,pImgName
+		FROM ( SELECT storeDetailOptNum, RANK() OVER (ORDER BY SUM(sDetailQty) DESC) rank, SUM(sDetailQty) sumQty FROM storeDetail GROUP BY storeDetailOptNum ) a 
+        LEFT OUTER JOIN storeDetailOpt d ON a.storeDetailOptNum = d.storeDetailOptNum
+        JOIN product p ON d.pNum = p.pNum
+        JOIN productImage i ON p.pNum = i.pNum
+		WHERE ROWNUM <![CDATA[ <= ]]> 4
+		ORDER BY sumQty DESC
+	</select>
+	
+	<select id="listTotProduct" resultType="com.fin.app.product.Product">
+        select  p.pNum, p.pName, p.pPrice, p.pCateNum, p.pDiscountRate, pDetailPrice,pImgName
+        from product p
+        join storeDetailOpt s on p.pNum = s.pNum
+        LEFT OUTER JOIN (
+			SELECT orderNum, storeDetailOptNum FROM(
+				SELECT orderNum, storeDetailOptNum,
+					ROW_NUMBER() OVER(PARTITION BY storeDetailOptNum ORDER BY orderNum  ASC)rank
+				 FROM storeDetail
+			) WHERE rank = 1
+		) d ON s.storeDetailOptNum = d.storeDetailOptNum
+        JOIN productImage i ON p.pNum = i.pNum
+        WHERE ROWNUM<![CDATA[ <= ]]> 4
+        ORDER BY pName DESC	
+	</select>
+	
+	<select id="listNewProduct" resultType="com.fin.app.product.Product">
+        select  p.pNum, p.pName, p.pPrice, p.pCateNum, p.pDiscountRate, pDetailPrice, pImgName, pDate
+        from product p
+        join storeDetailOpt s on p.pNum = s.pNum
+        LEFT OUTER JOIN (
+			SELECT orderNum, storeDetailOptNum FROM(
+				SELECT orderNum, storeDetailOptNum,
+					ROW_NUMBER() OVER(PARTITION BY storeDetailOptNum ORDER BY orderNum  ASC)rank
+				 FROM storeDetail
+			) WHERE rank = 1
+		) d ON s.storeDetailOptNum = d.storeDetailOptNum
+        JOIN productImage i ON p.pNum = i.pNum
+        WHERE ROWNUM<![CDATA[ <= ]]> 4
+        ORDER BY pDate DESC		
+	</select>
+	
+	
+	
+	
+
+</mapper>

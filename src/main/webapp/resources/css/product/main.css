@@ -1,0 +1,101 @@
+@charset "UTF-8";
+
+@font-face {
+    font-family: 'Cafe24Ssurround';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2105_2@1.0/Cafe24Ssurround.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.storeBody{
+	margin: 0;
+	padding: 0;
+}
+
+.storebody-main{
+	padding: 0;
+	width: 1300px;
+	margin: auto;
+}
+
+.imgStore{
+	width: 100%;
+}
+.storeBody .productTitle{
+	font-size: 30px;
+    text-align: center;
+    margin-top: 100px;
+    margin-bottom: 30px;
+	color: #219ebc;  
+	font-family: Cafe24Ssurround, sans-serif;
+	text-shadow: 2px 2px 2px gray;    
+}
+
+.storeBody .imgstore{
+	height: 300px;
+}
+
+.storeBody .imgstore > img{
+    position: absolute;
+    left : 0;
+    width: 100%;
+}
+
+.storeBody .img, .storeBody .img img{
+	width: 300px;
+    height: 400px;
+}
+
+.storeBody .cardBoarder{
+    margin-top: 130px;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.storeBody .pproduct, .storeBody .ttproduct{
+    float: left;
+    margin-right: 10px;
+
+}
+.storeBody .banner > img{
+    width: 100%;
+}
+.storeBody .storeCard{
+    margin: auto;
+    height: 700px;
+}
+.storeBody .banner{
+	clear: both;
+	margin-top: 30px;
+	margin-bottom: 30px;
+}
+
+.storeBody .donation{
+	background: gray;
+}
+
+.storeBody .name{
+    width: 170px;
+    height: 30px;
+    font-size: initial;
+    margin-top: 10px;
+}
+
+.storeBody .price{
+	text-align: right;
+	height: 50px;
+	font-size: 18px;
+}
+
+
+.storeBody .popularProduct, .storeBody .totalProduct{
+	padding-left: 30px;
+}
+
+.storeBody .storeClick{
+	cursor: pointer;    
+	font-size: 20px;
+    text-decoration: none;
+    color: black;
+}
+

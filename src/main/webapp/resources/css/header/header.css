@@ -1,0 +1,114 @@
+@charset "UTF-8";
+
+/*
+상단 헤더 css 
+*/
+.fixed-top {
+	position: relative;
+	top: 0;
+	left: 0;
+	right: 0;
+}
+
+.flex-center {
+	display: flex;
+	align-items: center;
+}
+.justify-content-center  {
+	justify-content: center;
+}
+
+.clear {
+	clear: both;
+}
+
+.top-bar {
+  	padding: 10px 0;
+  	font-size: 14px;
+  	color: #fff;
+  	width: 100%;
+	background: orange;
+    height: 70px;  
+}
+.top-bar .top-info{
+	margin-right: auto;
+}
+.top-bar .top-links{
+    height: 50px;
+    font-size: 20px;
+    padding-top: 15px;	
+}
+.top-bar .top-links a {
+    color: rgba(255, 255, 255, 0.6);
+    padding-left: 15px;
+    display: inline-block;
+    line-height: 1px;
+    transition: 0.3s;
+}
+.top-bar .top-links a:hover {
+  	color: #fff;
+}
+.top-bar.topbar-scrolled {
+  	top: -40px;
+}
+
+.container {
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+@media (min-width: 576px) {
+	.container {
+	    max-width: 540px;
+	}
+}
+@media (min-width: 768px) {
+	.container {
+	    max-width: 720px;
+	}
+}
+@media (min-width: 992px) {
+	.container {
+		max-width: 960px;
+	}
+}
+@media (min-width: 1200px) {
+	.container {
+	    max-width: 1140px;
+	}
+}
+
+/**/
+
+@font-face {
+    font-family: 'Cafe24Ssurround';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2105_2@1.0/Cafe24Ssurround.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.titleTop{
+	color: wheat;
+}
+
+.storeHeader{
+	font-family: Cafe24Ssurround, sans-serif;
+}
+.title{
+	padding-right: 10px;
+	padding-left: 50px;
+}
+
+.headerBottom{
+    position: relative;
+    display: flex;
+    text-align: center;
+    padding-left: 200px;	
+    font-size: 20px;
+}
+
+.item{
+	padding: 10px;
+}

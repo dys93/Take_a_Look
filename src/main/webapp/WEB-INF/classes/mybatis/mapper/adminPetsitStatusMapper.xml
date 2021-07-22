@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="adminPetsitStatus">
+	<select id="reservCount" parameterType="String" resultType="Integer">
+		SELECT NVL(COUNT(*), 0)
+		FROM reservation
+		WHERE TO_CHAR(checkIn, 'yyyy-mm-dd') = '${cDate}'
+	</select>
+	
+	<select id="bestPetsit" resultType="com.fin.app.admin.Admin">
+        SELECT ROWNUM, a.*, p.mId
+		FROM ( SELECT petNum, RANK() OVER (ORDER BY NVL(COUNT(*), 0) DESC) rank, NVL(COUNT(*), 0) count FROM reservation GROUP BY petNum) a
+        JOIN petsit p ON a.petNum = p.petNum
+        WHERE ROWNUM <![CDATA[ <= ]]> 6
+	</select>
+	
+</mapper>
