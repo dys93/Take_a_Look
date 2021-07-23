@@ -1,8 +1,13 @@
-# Take A Look
+# Take a Look (뗴껄룩)
 
 ![logO](https://user-images.githubusercontent.com/82743025/126526370-33d97941-8192-4025-825a-099522eef9b9.png)
 
-펫시터 예약 & 반려동물용품 스토어
+---
+펫시터 예약 & 반려동물용품 스토어 
+
+기간: 2021. 05. 31 ~ 2021. 06. 28
+개발 인원: 5명
+개발 툴: STS, sqlDeveloper
 
 프로젝트 소개
 --------------------
