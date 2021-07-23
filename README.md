@@ -1,6 +1,8 @@
-# [Take A Look] 펫시터 예약 서비스 & 반려동물용품 스토어
+# Take A Look
 
 ![logO](https://user-images.githubusercontent.com/82743025/126526370-33d97941-8192-4025-825a-099522eef9b9.png)
+
+펫시터 예약 & 반려동물용품 스토어
 
 프로젝트 소개
 --------------------
