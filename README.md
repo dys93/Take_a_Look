@@ -18,7 +18,7 @@ __진행상황 공유__
 __추가 회의 및 피드백__    
 작업시 디스코드에 접속하여 작업을 진행하고 질문이나 오류 등을 공유하고 피드백 해주어 신속한 작업을 가능하게 하고 완성도를 높이도록 함.  
 
-<img width="881" alt="진행과정" src="https://user-images.githubusercontent.com/76812787/126892598-15b8df4a-d0f0-4eca-aab7-32a77fdbddce.PNG">
+<img width="937" alt="진행과정" src="https://user-images.githubusercontent.com/76812787/126892762-4402b793-5c4b-4c99-93f7-53638951e30f.PNG">
 
 ---
 
