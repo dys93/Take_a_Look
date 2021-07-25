@@ -98,6 +98,7 @@ __추가 회의 및 피드백__
 #### __메인페이지__  
 <img width="816" alt="메인" src="https://user-images.githubusercontent.com/76812787/126909176-ca97d15d-43b8-4ed5-97b5-dbdbf6d08a93.PNG">
 <img width="940" alt="메인화면" src="https://user-images.githubusercontent.com/76812787/126909793-4b2dfb2f-9792-473e-9bf3-58c5b9b87672.PNG">
+<img width="942" alt="메인페이지" src="https://user-images.githubusercontent.com/76812787/126910304-a02a7816-defa-4d33-875d-8211cbd1de98.PNG">
 
 JavaScript를 사용하여 마우스 스크롤 시 페이지가 지정된 영역만큼 한 번에 이동
 메인 페이지에서 Bootstrap을 이용하여 한 화면에서 다중 이미지를 슬라이드 형식으로 제공
