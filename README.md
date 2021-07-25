@@ -96,8 +96,6 @@ __추가 회의 및 피드백__
 
 ## 실행화면  
 #### __메인페이지__  
-<img width="816" alt="메인" src="https://user-images.githubusercontent.com/76812787/126909176-ca97d15d-43b8-4ed5-97b5-dbdbf6d08a93.PNG">
-<img width="940" alt="메인화면" src="https://user-images.githubusercontent.com/76812787/126909793-4b2dfb2f-9792-473e-9bf3-58c5b9b87672.PNG">
 <img width="942" alt="메인페이지" src="https://user-images.githubusercontent.com/76812787/126910304-a02a7816-defa-4d33-875d-8211cbd1de98.PNG">
 
 JavaScript를 사용하여 마우스 스크롤 시 페이지가 지정된 영역만큼 한 번에 이동  
@@ -108,7 +106,16 @@ Mybatis와 JSTL을 사용하여 현재 매출을 기반으로한 인기상품과
 API의 totalCount 정보를 추출하여 footer 부분에 오늘 구조된 동물의 마릿수를 표시    
 
 #### __로그인__  
-<img width="932" alt="로그인" src="https://user-images.githubusercontent.com/76812787/126910621-0ee9465d-3420-4286-b295-050b7bbed1ad.PNG">
 <img width="936" alt="로그인페이지" src="https://user-images.githubusercontent.com/76812787/126910840-f7a96d5d-466c-48fc-9e3c-bc20ddd2c3a5.PNG">
+
+아이디와 비밀번호가 일치하면 로그인에 성공하고 메인 페이지로 리다이렉트  
+실패하면 하단 부분에 아이디 또는 패스워드가 일치하지 않는다는 메시지를 출력  
+SMTP 기능을 사용하여 아이디를 잊어버린 경우 회원 가입 시 입력했던 이메일 정보를 받아 그 이메일로 회원 아이디를 전송  
+SMTP 기능을 사용하여 비밀번호를 잊어버린 경우회원 아이디를 받아 아이디에 연동된 이메일로 임시 비밀번호를 전송  
+아이디, 닉네임, 비밀번호에는 Ajax와 정규 표현식을 응용한 유효성 검사가 포함  
+
+#### __회원정보__  
+
+
 
 
