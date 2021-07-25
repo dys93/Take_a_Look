@@ -108,7 +108,7 @@ Mybatis와 JSTL을 사용하여 현재 매출을 기반으로한 인기상품과
 API의 totalCount 정보를 추출하여 footer 부분에 오늘 구조된 동물의 마릿수를 표시    
 
 #### __로그인__  
-
+<img width="932" alt="로그인" src="https://user-images.githubusercontent.com/76812787/126910621-0ee9465d-3420-4286-b295-050b7bbed1ad.PNG">
 
 
 
