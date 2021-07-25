@@ -96,7 +96,7 @@ __추가 회의 및 피드백__
 
 ## 실행화면  
 #### __메인페이지__
-
+<img width="816" alt="메인" src="https://user-images.githubusercontent.com/76812787/126909176-ca97d15d-43b8-4ed5-97b5-dbdbf6d08a93.PNG">
 #### __로그인__
 
 
