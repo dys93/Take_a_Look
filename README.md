@@ -13,7 +13,7 @@ __펫시터 예약 & 반려동물용품 스토어__
 ---
 
 # 개발환경
-
+<img width="942" alt="개발환경" src="https://user-images.githubusercontent.com/76812787/127005816-9dbd03c3-e640-40b8-b07f-a8bf5d54457b.PNG">
 
 
 # 개발과정    
