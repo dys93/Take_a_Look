@@ -137,4 +137,4 @@ JavaScript에서 유효성검사를 및 비밀번호 검사를 진행하고, Ser
 <img width="944" alt="펫시터글작성" src="https://user-images.githubusercontent.com/76812787/126934948-3fff2a07-a2cb-4ca8-9132-40178c7f0fc8.PNG">
 <img width="861" alt="펫시터예약페이지" src="https://user-images.githubusercontent.com/76812787/126938131-66b473a3-642f-4b1d-bd3e-9e3c9d985e24.png">
 <img width="861" alt="펫시터 결제 페이지" src="https://user-images.githubusercontent.com/76812787/126938290-b48acccb-37ca-4868-951d-aec930bd17df.png">
-
+<img width="857" alt="펫시터결제" src="https://user-images.githubusercontent.com/76812787/126938651-584c0471-c821-46b4-9c61-116590649bc8.PNG">
