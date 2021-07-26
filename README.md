@@ -139,7 +139,5 @@ JavaScript에서 유효성검사를 및 비밀번호 검사를 진행하고, Ser
 <img width="857" alt="펫시터결제" src="https://user-images.githubusercontent.com/76812787/126938651-584c0471-c821-46b4-9c61-116590649bc8.PNG">
 
 #### __관리자 페이지__  
-<img width="943" alt="관리자1" src="https://user-images.githubusercontent.com/76812787/126939745-67a93a99-7ba2-4b9e-a07d-bcf9598e40fc.PNG">
-<img width="937" alt="관리자p" src="https://user-images.githubusercontent.com/76812787/126939747-2ba73bb4-98d8-41d8-8923-648ed25ad1ed.PNG">
 <img width="939" alt="관리자페이지1" src="https://user-images.githubusercontent.com/76812787/126940688-3f45f26a-487c-49f6-99dc-7b254f40ffbc.PNG">
 <img width="929" alt="관리자페이지2" src="https://user-images.githubusercontent.com/76812787/126940694-506bca54-b800-4b40-babc-a29f327d8c7b.PNG">
