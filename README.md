@@ -135,5 +135,5 @@ JavaScript에서 유효성검사를 및 비밀번호 검사를 진행하고, Ser
 #### __펫시터 페이지__
 <img width="940" alt="펫시터 메인1" src="https://user-images.githubusercontent.com/76812787/126934945-74a70722-bf2d-4c25-b688-7b577d7d4fcc.PNG">
 <img width="944" alt="펫시터글작성" src="https://user-images.githubusercontent.com/76812787/126934948-3fff2a07-a2cb-4ca8-9132-40178c7f0fc8.PNG">
-![시터 전체](https://user-images.githubusercontent.com/76812787/126936584-c1af41f3-e7ab-495a-999d-3ea241f376e3.jpg)
+
 
