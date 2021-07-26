@@ -3,12 +3,18 @@
 ![logO](https://user-images.githubusercontent.com/82743025/126526370-33d97941-8192-4025-825a-099522eef9b9.png)
 
 __펫시터 예약 & 반려동물용품 스토어__   
-기간: 2021. 05. 31 ~ 2021. 06. 28  
-개발 인원: 5명  
-개발 툴: STS, sqlDeveloper  
-사용 언어: JAVA(JDK 1.8), Oracle SQL(11g Express), Html5, CSS3, Javascript, JSP&Servlet  
+
+
+기간 : 2021. 05. 31 ~ 2021. 06. 28  
+개발 인원 : 5명 
+개발 툴 : STS, sqlDeveloper  
+
 
 ---
+
+# 개발환경
+
+
 
 # 개발과정    
 __문서공유__    
@@ -42,8 +48,6 @@ __추가 회의 및 피드백__
 - 관리자 페이지와 클라이언트 페이지를 분리 개발하여 개발 효율성을 증가시키고 사이트 관리에 대한 유지 보수성을 향상
 - Spring의 Transaction 처리를 이용하여 데이터의 무결성을 보장
 ## 주요기능
-<img width="508" alt="주요기능1" src="https://user-images.githubusercontent.com/76812787/126893817-8aa8970e-2983-41c4-b27e-c9a131f0c012.PNG">
-<img width="501" alt="주요기능2" src="https://user-images.githubusercontent.com/76812787/126893821-2feebf7e-4109-4b2c-a3e2-7c1825f53837.PNG">
 <img width="941" alt="주요기능" src="https://user-images.githubusercontent.com/76812787/127001479-0c5137b0-5758-4aae-8c39-3f45aa90cd6e.PNG">
 ## 실행화면  
 #### __메인 페이지__  
