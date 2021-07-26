@@ -129,6 +129,9 @@ SMTP 기능을 사용하여 비밀번호를 잊어버린 경우회원 아이디�
 JavaScript에서 유효성검사를 및 비밀번호 검사를 진행하고, Service에서 로그인중인 계정의 비밀번호와 일치하는지 검사. 일치할 시 세션을 모두 버리고 로그아웃  
 
 #### __스토어페이지__
+<img width="938" alt="스토어1" src="https://user-images.githubusercontent.com/76812787/126932518-f17f99d1-a2be-43c3-ad94-4d13b2efa955.PNG">
+<img width="932" alt="스토어2" src="https://user-images.githubusercontent.com/76812787/126932521-ab17a45e-7cad-4b77-b49c-b98f689e3a7c.PNG">
+
 
 
 
