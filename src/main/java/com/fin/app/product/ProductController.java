@@ -32,7 +32,7 @@ import com.fin.app.member.SessionInfo;
 @Controller("product.productController")
 @RequestMapping("/product/*")
 public class ProductController {
-	//커ㅅㅅ
+
 	@Autowired
 	private ProductService service;
 	

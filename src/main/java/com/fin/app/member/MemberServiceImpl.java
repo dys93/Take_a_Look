@@ -18,7 +18,7 @@ public class MemberServiceImpl implements MemberService {
 	
 	@Autowired
 	private MailSender mailSender;
-	//커밋
+
 	@Override
 	public Member loginMember(String mId) {
 		Member dto=null;

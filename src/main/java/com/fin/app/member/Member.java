@@ -3,7 +3,7 @@ package com.fin.app.member;
 public class Member {
 	private long mNum;
 	private int mType;//회원구분(회원/비회원)
-	//member
+
 	private String mId;
 	private String mPwd;
 	private String mNick;
